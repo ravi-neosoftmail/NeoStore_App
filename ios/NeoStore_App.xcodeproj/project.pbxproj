@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		18FBA8C226C4DF43001D3EB2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FBA8C126C4DF43001D3EB2 /* File.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9DD68D5C6E0C38247533C465 /* libPods-NeoStore_App-NeoStore_AppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6015A79E72F960A55E4F6B74 /* libPods-NeoStore_App-NeoStore_AppTests.a */; };
 		B127760D663B74644EB82581 /* libPods-NeoStore_App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143A305808BFB88C84E69982 /* libPods-NeoStore_App.a */; };
@@ -37,6 +38,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = NeoStore_App/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = NeoStore_App/main.m; sourceTree = "<group>"; };
 		143A305808BFB88C84E69982 /* libPods-NeoStore_App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NeoStore_App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18FBA8C026C4DF42001D3EB2 /* NeoStore_App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NeoStore_App-Bridging-Header.h"; sourceTree = "<group>"; };
+		18FBA8C126C4DF43001D3EB2 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		4DF5C70E0A46709D3BF0F803 /* Pods-NeoStore_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoStore_App.debug.xcconfig"; path = "Target Support Files/Pods-NeoStore_App/Pods-NeoStore_App.debug.xcconfig"; sourceTree = "<group>"; };
 		6015A79E72F960A55E4F6B74 /* libPods-NeoStore_App-NeoStore_AppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NeoStore_App-NeoStore_AppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = NeoStore_App/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				18FBA8C126C4DF43001D3EB2 /* File.swift */,
 			);
 			name = NeoStore_App;
 			sourceTree = "<group>";
@@ -122,6 +126,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D9BC8B1C0ECF683A38960293 /* Pods */,
+				18FBA8C026C4DF42001D3EB2 /* NeoStore_App-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -145,7 +150,6 @@
 				E6F25B189411418305C81461 /* Pods-NeoStore_App-NeoStore_AppTests.debug.xcconfig */,
 				E018A0816811565712785C5B /* Pods-NeoStore_App-NeoStore_AppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -208,7 +212,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -412,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				18FBA8C226C4DF43001D3EB2 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6F25B189411418305C81461 /* Pods-NeoStore_App-NeoStore_AppTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -458,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E018A0816811565712785C5B /* Pods-NeoStore_App-NeoStore_AppTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = NeoStore_AppTests/Info.plist;
@@ -498,6 +505,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = NeoStore_App;
+				SWIFT_OBJC_BRIDGING_HEADER = "NeoStore_App-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -523,6 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = NeoStore_App;
+				SWIFT_OBJC_BRIDGING_HEADER = "NeoStore_App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

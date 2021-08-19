@@ -7,19 +7,18 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  Text,
-} from 'react-native';
+import DrawerNavigator from './src/containers/navigation/DrawerNavigator/DrawerNavigator';
+import {Provider} from 'react-redux';
+import store, {persistor} from './src/redux/store/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
-
-const App = () =>  {
-
-
+const App = () => {
   return (
-    <SafeAreaView>
-      <Text>App.js</Text>
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <DrawerNavigator />
+      </PersistGate>
+    </Provider>
   );
 };
 
