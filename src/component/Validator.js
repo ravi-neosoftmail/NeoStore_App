@@ -1,5 +1,51 @@
+/**
+ *
+ * @param {*} param0 props in which we get an obect of data
+ * val in whcih we get the user text input character
+ * initialValue as an object which have the data of state
+ * @description This is error Validator function which is used to validate the error of text input.
+ * @author Ravi Ranjan
+ * @returns the errors as per user Text Input field.
+ */
+
 export const errorValidator = props => {
   const errorOccur = {};
+
+  if (props.hasOwnProperty('email')) {
+    if (props.email.length === 0) {
+      errorOccur['email'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('password')) {
+    if (props.password.length === 0) {
+      errorOccur['password'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('firstName')) {
+    if (props.firstName.length === 0) {
+      errorOccur['firstName'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('lastName')) {
+    if (props.lastName.length === 0) {
+      errorOccur['lastName'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('confirm_password')) {
+    if (props.confirm_password.length === 0) {
+      errorOccur['confirm_password'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('mobile')) {
+    if (props.mobile.length === 0) {
+      errorOccur['mobile'] = '*required';
+    }
+  }
 
   if (props.hasOwnProperty('gender')) {
     if (props.gender.length === 0) {
@@ -8,8 +54,62 @@ export const errorValidator = props => {
   }
 
   if (props.hasOwnProperty('conditions')) {
-    if (props.conditions.length === 0) {
+    if (!props.conditions) {
       errorOccur['conditions'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('addressLine')) {
+    if (props.addressLine.length === 0) {
+      errorOccur['addressLine'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('landMark')) {
+    if (props.landMark.length === 0) {
+      errorOccur['landMark'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('pincode')) {
+    if (props.pincode.length === 0) {
+      errorOccur['pincode'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('city')) {
+    if (props.city.length === 0) {
+      errorOccur['city'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('state')) {
+    if (props.state.length === 0) {
+      errorOccur['state'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('country')) {
+    if (props.country.length === 0) {
+      errorOccur['country'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('address')) {
+    if (props.address.length === 0) {
+      errorOccur['address'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('newPassword')) {
+    if (props.newPassword.length === 0) {
+      errorOccur['newPassword'] = '*required';
+    }
+  }
+
+  if (props.hasOwnProperty('confirmNewPassword')) {
+    if (props.confirmNewPassword.length === 0) {
+      errorOccur['confirmNewPassword'] = '*required';
     }
   }
 
@@ -105,12 +205,12 @@ export const addressValidator = (val, initialValue) => {
 };
 
 export const editAddressValidator = (val, initialValue) => {
-    if (val.length === 0) {
-      initialValue.error['address'] = '*required';
-    } else {
-      initialValue.error['address'] = '';
-    }
-  };
+  if (val.length === 0) {
+    initialValue.error['address'] = '*required';
+  } else {
+    initialValue.error['address'] = '';
+  }
+};
 
 export const landMarkValidator = (val, initialValue) => {
   if (val.length === 0) {

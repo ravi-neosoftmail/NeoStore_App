@@ -4,6 +4,16 @@ import {Colors} from '../../../assets/Colors';
 import normalize from 'react-native-normalize';
 import {useSelector} from 'react-redux';
 
+
+/**
+ *
+ * @param {*} param0 
+ * @description This is a Place Order Flatlist screen which used to create a Ui of place order products cards.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function PlaceOrderFlatlist() {
   const cart = useSelector(state => state.cartProduct.cartProduct);
   const {products, grandTotal} = cart;
@@ -22,7 +32,7 @@ export default function PlaceOrderFlatlist() {
             <View style={styles.detailsView}>
               <Text style={styles.textStyle}>{item.productId.name}</Text>
               <View style={styles.priceView}>
-                <Text style={styles.textStyle}>Price : {item.totalAmount}</Text>
+                <Text style={styles.textStyle}>Price : {item.productId.price}</Text>
               </View>
               <View style={styles.priceView}>
                 <Text style={styles.textStyle}>Quantity : {item.quantity}</Text>

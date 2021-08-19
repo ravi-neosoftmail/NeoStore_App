@@ -11,7 +11,7 @@ import {SliderBox} from 'react-native-image-slider-box';
 import ProductListFlatlist from '../ProductList/ProductListFlatlist';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {productListRequest} from '../../../redux/action/action';
+import {filterCategory, productListRequest} from '../../../redux/action/action';
 import {Colors} from '../../../assets/Colors';
 import Swiper from 'react-native-swiper';
 
@@ -29,17 +29,18 @@ export default function Dashboard({navigation}) {
     state => state.productList.productListData,
   );
   const isLoading = useSelector(state => state.productList.isLoading);
-  const [sortedData, setSortedData] = useState('');
+  const [cloneData, setCloneData] = useState(productListData);
 
   useEffect(() => {
     dispatch(productListRequest());
   }, []);
 
   useEffect(() => {
-    const res = productListData?.sort(function (a, b) {
-      return b.avgRating - a.avgRating;
-    });
-    setSortedData(res);
+    setCloneData(
+      cloneData.sort(function (a, b) {
+        return b.avgRating - a.avgRating;
+      }),
+    );
   }, [productListData]);
 
   return (
@@ -53,48 +54,73 @@ export default function Dashboard({navigation}) {
           <Text style={{color: Colors.gray}}>Search Product </Text>
         </View>
       </TouchableOpacity>
-      <Swiper autoplay loop>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('All Products', {type: 'dashboardProduct'})
-          }>
-          <Image
-            style={styles.swiperImage}
-            source={require('../../../assets/Images/bed.jpeg')}
-            resizeMode="stretch"
-          />
-        </TouchableOpacity>
+      <View style={{width: '100%', height: 300}}>
+        <Swiper autoplay loop height={250}>
+          <TouchableOpacity
+            // onPress={() => navigation.navigate('All Products', {type: 'Bed'})}
+            onPress={() => {
+              dispatch(filterCategory('Bed'))
+              navigation.navigate('All Products')
+            }}
 
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('All Products', {type: 'dashboardProduct'})
-          }>
-          <Image
-            style={styles.swiperImage}
-            source={require('../../../assets/Images/Chair.png')}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
+            >
+            <Image
+              style={styles.swiperImage}
+              source={require('../../../assets/Images/bed.jpeg')}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('All Products', {type: 'dashboardProduct'})
-          }>
-          <Image
-            style={styles.swiperImage}
-            source={require('../../../assets/Images/Sofa.jpeg')}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            // onPress={() =>
+            //   navigation.navigate('All Products', {type: 'Chair'})
+            // }
+            onPress={() => {
+              dispatch(filterCategory('Chair'))
+              navigation.navigate('All Products')
+            }}
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate('All Products', {type: ''})}>
-          <Image
-            style={styles.swiperImage}
-            source={require('../../../assets/Images/Table.jpeg')}
-            resizeMode="stretch"
-          />
-        </TouchableOpacity>
-      </Swiper>
+            >
+            <Image
+              style={styles.swiperImage}
+              source={require('../../../assets/Images/Chair.png')}
+              resizeMode="stretch"
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            // onPress={() => navigation.navigate('All Products', {type: 'Sofa'})}
+            onPress={() => {
+              dispatch(filterCategory('Sofa'))
+              navigation.navigate('All Products')
+            }}
+
+            >
+            <Image
+              style={styles.swiperImage}
+              source={require('../../../assets/Images/Sofa.jpeg')}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            // onPress={() =>
+            //   navigation.navigate('All Products', {type: 'Table'})
+            // }
+            onPress={() => {
+              dispatch(filterCategory('Table'))
+              navigation.navigate('All Products')
+            }}
+
+            >
+            <Image
+              style={styles.swiperImage}
+              source={require('../../../assets/Images/Table.jpeg')}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
+        </Swiper>
+      </View>
 
       <View style={styles.productsHeaderView}>
         <Text style={styles.productsHeaderText}> Top Products for you </Text>
@@ -107,7 +133,7 @@ export default function Dashboard({navigation}) {
         />
       ) : (
         <ProductListFlatlist
-          productListData={sortedData}
+          productListData={cloneData.slice(0, 5)}
           navigation={navigation}
           type="dashboard"
         />

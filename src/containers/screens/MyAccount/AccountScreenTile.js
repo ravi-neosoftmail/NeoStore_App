@@ -4,6 +4,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import normalize from 'react-native-normalize';
 import { Colors } from '../../../assets/Colors';
 
+
+/**
+ *
+ * @param {*} param0 props in which onPress funtionality, Icon name, Icon title and arrow Icon name.
+ * @description This is a Account Screen Tile screen which requires Icon name, title and onPress functionality.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function AccountScreenTile(props) {
   return (
     <TouchableOpacity 

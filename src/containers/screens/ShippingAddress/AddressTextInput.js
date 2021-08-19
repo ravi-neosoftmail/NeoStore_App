@@ -3,6 +3,16 @@ import {View, Text, StyleSheet, TextInput} from 'react-native';
 import normalize from 'react-native-normalize';
 import {Colors} from '../../../assets/Colors';
 
+
+/**
+ * 
+ * @param {*} param0 props which contains the text input diffent values.
+ * @description This is a Address Text Input screen which shows the UI of the user address text input. 
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function AddressTextInput(props) {
   return (
     <View style={styles.container}>

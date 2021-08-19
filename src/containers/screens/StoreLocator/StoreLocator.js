@@ -4,6 +4,16 @@ import MapView from 'react-native-maps';
 import {Marker} from 'react-native-maps';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../../../assets/Colors';
+
+/**
+ * 
+ * @param {*} param0 
+ * @description This is a Store Locator screen which the different store locator.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function StoreLocator() {
   return (
     <View style={styles.container}>

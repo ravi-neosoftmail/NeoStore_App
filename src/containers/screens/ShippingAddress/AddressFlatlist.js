@@ -13,6 +13,16 @@ import {Colors} from '../../../assets/Colors';
 import {delAddressRequest, saveUserAddress} from '../../../redux/action/action';
 import {getUserAddressRequest} from '../../../redux/action/action';
 
+
+/**
+ * 
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * userAddress which contains the user address data.
+ * @description This is a Address Flatlist screen which shows the UI of all the Users Address.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
 export default function AddressFlatlist({userAddress, navigation}) {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userData.user);
@@ -56,6 +66,7 @@ export default function AddressFlatlist({userAddress, navigation}) {
               dispatch(saveUserAddress(payload));
               navigation.navigate('Place Order');
             }}>
+              {console.log(item,'item')}
             <View style={styles.addressView}>
               <Text style={styles.addressText}>
                 {item.addressLine}, {item.state} - {item.pincode},{' '}

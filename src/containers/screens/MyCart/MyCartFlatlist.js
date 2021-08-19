@@ -18,7 +18,19 @@ import {
   updateProductQuantityRequest,
 } from '../../../redux/action/action';
 
+/**
+ *
+ * @param {*} param0 props which is used to get the products details.
+ * @description This is  My Cart Flatlist screen which used to create a Ui of cart products cards .
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function MyCartFlatlist(props) {
+
+
+
   const dispatch = useDispatch();
 
   const userData = useSelector(state => state.userData.user);
@@ -89,7 +101,7 @@ export default function MyCartFlatlist(props) {
                 <Text style={styles.textStyle}>{item.productId.name}</Text>
                 <View style={styles.priceView}>
                   <Text style={styles.textStyle}>
-                    Price : {item.totalAmount}
+                    Price : {item.productId.price}
                   </Text>
                 </View>
                 <View style={styles.servesView}>

@@ -21,6 +21,18 @@ import {
 } from '../../../redux/action/action';
 import RateModal from './RateModal';
 import Swiper from 'react-native-swiper';
+import Toast from 'react-native-toast-message';
+import Cart from 'react-native-vector-icons/Feather';
+
+/**
+ *
+ * @param {*} param0 props in which contains navigation and information of Products.
+ * @description This is a All Products Details screen which shows the details of an individual product and also have some for filtered the product on the basis of category, color, rating and price.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 
 export default function ProductDetails(props) {
   const dispatch = useDispatch();
@@ -47,10 +59,12 @@ export default function ProductDetails(props) {
   const {navigation} = props;
 
   const [count, setCount] = useState(1);
-  const onShare = async name => {
+  const onShare = async (name, mainImage) => {
+    console.log(name, mainImage);
     try {
       await Share.share({
-        message: name,
+        url: mainImage,
+        // message: name,
       });
     } catch (error) {
       alert(error.message);
@@ -63,17 +77,29 @@ export default function ProductDetails(props) {
     }
   };
 
-  const handleCart = () => {
+  const handleCart = (type) => {
+
+    console.log(type);
+
     const payload = {
       productId: id,
       quantity: count,
     };
 
-    dispatch(addCartProductRequest({payload, token, getCart, errorAlert}));
+    dispatch(addCartProductRequest({payload, token, type, getCart, errorAlert}));
   };
 
+  // const handleBuyNow = () => {
+  //   const payload = {
+  //     productId: id,
+  //     quantity: count,
+  //   };
+
+  //   dispatch(addCartProductRequest({payload, token, getCart, errorAlert}));
+  // };
+
   const showAlert = () => {
-    Alert.alert('Please Login first', '', [
+    Alert.alert('You need to Login first', '', [
       {
         text: 'Cancel',
       },
@@ -86,20 +112,42 @@ export default function ProductDetails(props) {
     ]);
   };
 
-  const getCart = () => {
-    navigation.navigate('My Cart');
+  const getCart = (type) => {
+   console.log(type, 'getCart');
+   if(type==='buy'){
+     props.navigation.navigate('My Cart');
+   }
     dispatch(getCartProductRequest(token));
+    Toast.show({
+      position: 'bottom',
+      text1: 'Product successfully added',
+      visibilityTime: 3000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
   };
 
-  const errorAlert = message => {
-    Alert.alert(message, '', [
-      {
-        text: 'Ok',
-        onPress: () => {
-          props.navigation.navigate('My Cart');
-        },
-      },
-    ]);
+  const errorAlert = (message, type) => {
+    Toast.show({
+      position: 'bottom',
+      text1: message,
+      visibilityTime: 3000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+    if(type==='buy'){
+      props.navigation.navigate('My Cart');
+    }
+    // Alert.alert(message, '', [
+    //   {
+    //     text: 'Ok',
+    //     onPress: () => {
+    //       props.navigation.navigate('My Cart');
+    //     },
+    //   },
+    // ]);
   };
 
   return (
@@ -155,7 +203,7 @@ export default function ProductDetails(props) {
 
         <TouchableOpacity
           style={styles.shareTouchable}
-          onPress={() => onShare(name)}>
+          onPress={() => onShare(name,mainImage)}>
           <Icon name="share-variant" size={40} />
         </TouchableOpacity>
 
@@ -257,20 +305,33 @@ export default function ProductDetails(props) {
         </View>
       </ScrollView>
 
+      <TouchableOpacity
+        style={styles.addTouchable}
+        activeOpacity={0.9}
+        onPress={() => {
+          isLoggedIn ? handleCart('cart') : showAlert();
+        }}
+        >
+        <Cart name="shopping-cart" size={30} color={Colors.white} />
+
+      </TouchableOpacity>
+
       <View style={styles.botomView}>
         <TouchableOpacity
           style={styles.addCartTouchable}
           activeOpacity={0.8}
           onPress={() => {
-            isLoggedIn ? handleCart() : showAlert();
+            isLoggedIn ? handleCart('buy') : showAlert();
           }}>
-          <Text style={styles.addCartTouchableText}>Add to Cart </Text>
+          <Text style={styles.addCartTouchableText}> Buy Now </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.rateTouchable}
           activeOpacity={0.8}
-          onPress={() => setModalVisible(true)}>
+          onPress={() => {
+            isLoggedIn ? setModalVisible(true) : showAlert()
+            }}>
           <Text style={styles.rateTouchableText}>Rate Product</Text>
         </TouchableOpacity>
       </View>
@@ -448,5 +509,16 @@ const styles = StyleSheet.create({
   swiperImage: {
     height: '70%',
     width: '100%',
+  },
+  addTouchable: {
+    height: normalize(60),
+    width: normalize(60),
+    borderRadius: 50,
+    position: 'absolute',
+    right: normalize(10),
+    bottom: normalize(65),
+    backgroundColor: Colors.purple,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

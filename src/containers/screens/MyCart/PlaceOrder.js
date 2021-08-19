@@ -19,6 +19,14 @@ import {
 } from '../../../redux/action/action';
 import OrderSuccessModal from './OrderSuccessModal';
 
+/**
+ *
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * @description This is a Place Order screen which have the details of user products to place order.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
 export default function PlaceOrder({navigation}) {
   const dispatch = useDispatch();
 
@@ -38,7 +46,11 @@ export default function PlaceOrder({navigation}) {
       let payload = {
         addressId: deliveryAddress.id,
       };
-      dispatch(placeOrderRequest({payload, token, getOrder}));
+
+    console.log(deliveryAddress, payload);
+
+
+      // dispatch(placeOrderRequest({payload, token, getOrder}));
     }
   };
 

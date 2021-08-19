@@ -15,6 +15,18 @@ import { getCartProductRequest} from '../../../redux/action/action';
 import { useDispatch, useSelector } from "react-redux";
 
 
+/**
+ *
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * modalVisible returns the value true and false
+ * setModalVisible is a function which is used to set the modalVisible false.
+ * @description This is Order Success Modal screen which shows the animation of order succeess.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
+
 export default function OrderSuccessModal({ modalVisible, setModalVisible, navigation }) {
   
   const dispatch = useDispatch()

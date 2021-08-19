@@ -26,6 +26,17 @@ import Search from '../../screens/SearchBox/Search';
 import {useSelector} from 'react-redux';
 import ZoomImage from '../../screens/ProductList/ZoomImage';
 
+
+/**
+ *
+ * @param {*} param0 
+ * @description This is Stack Navigation screen which is used to create Stack Navigator of the App.
+ * @author Ravi Ranjan
+ * @returns the navigation to navigate between screens.
+ */
+
+
+
 const Stack = createNativeStackNavigator();
 
 const DrawerHeader = ({navigation}) => {
@@ -44,9 +55,12 @@ const CartDetails = ({navigation, count, isLoggedIn}) => {
       onPress={() => {isLoggedIn ?
         navigation.navigate('My Cart')
         : 
-        Alert.alert('Please Login First', '', [
+        Alert.alert('You need to Login First', '', [
           {
-            text: 'Ok',
+            text: 'Cancel',
+          },
+          {
+            text: 'Login',
             onPress: () => {
               navigation.navigate('Login');
             },
@@ -106,7 +120,7 @@ export default function StackNavigation({navigation}) {
         name="Dashboard"
         component={Dashboard}
         options={{
-          headerTitle: 'NeoStore',
+          headerTitle: 'Dashboard',
           headerShown: true,
           headerLeft: () => <DrawerHeader navigation={navigation} />,
           headerRight: () => (
@@ -114,16 +128,38 @@ export default function StackNavigation({navigation}) {
           ),
         }}
       />
-      <Stack.Screen name="All Products" component={AllProducts} />
+      <Stack.Screen name="All Products" component={AllProducts} 
+        //  options={{
+        //   // headerTitle: 'Dashboard',
+        //   headerShown: true,
+        //   headerLeft: () => <DrawerHeader navigation={navigation} />,
+        // }}
+      />
       <Stack.Screen name="Store Locator" component={StoreLocator} />
-      <Stack.Screen name="My Account" component={MyAccount} />
+      <Stack.Screen name="My Account" component={MyAccount} 
+           options={{
+            // headerTitle: 'Dashboard',
+            headerShown: true,
+            headerLeft: () => <DrawerHeader navigation={navigation} />,
+          }}
+      />
       <Stack.Screen name="Edit Profile" component={EditProfile} />
       <Stack.Screen name="My Cart" component={MyCart} />
-      <Stack.Screen name="Shipping Address" component={ShippingAddress} />
+      <Stack.Screen name="Shipping Address" component={ShippingAddress} 
+   
+      />
       <Stack.Screen name="Order History" component={OrderHistory} />
       <Stack.Screen name="Add Address" component={AddAddress} />
       <Stack.Screen name="Edit Address" component={EditAddress} />
-      <Stack.Screen name="Product Details" component={ProductDetails} />
+      <Stack.Screen name="Product Details" component={ProductDetails} 
+      options={{
+        // headerTitle: 'Dashboard',
+        headerRight: () => (
+          <CartDetails navigation={navigation} count={count} isLoggedIn={isLoggedIn}/>
+        ),
+            headerShown: true,
+      }}
+      />
       <Stack.Screen name="Order Details" component={OrderDetails} />
       <Stack.Screen name="Place Order" component={PlaceOrder} />
       <Stack.Screen name="Search Product" component={Search} />

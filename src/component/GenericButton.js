@@ -3,6 +3,16 @@ import { StyleSheet, TouchableOpacity, Text } from 'react-native'
 import normalize from 'react-native-normalize';
 import { Colors } from '../assets/Colors';
 
+
+/**
+ *
+ * @param {*} param0 props in which all the functionality of button is provided by the child.
+ * @description This is Generic button component which is used for code reusability.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a button of the UI (User Interface) should appear.
+ */
+
+
 export default function GenericButton(props) {
     return (
         <TouchableOpacity

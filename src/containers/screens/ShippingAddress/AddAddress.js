@@ -16,6 +16,16 @@ import {
   getUserAddressRequest,
 } from '../../../redux/action/action';
 
+
+/**
+ * 
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * @description This is a Add Address screen which requires user Address details.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function AddAddress({navigation}) {
   const dispatch = useDispatch();
 
@@ -34,7 +44,7 @@ export default function AddAddress({navigation}) {
   });
 
   const handleAddress = () => {
-    // let errorOccur = errorValidator(addressData);
+    let errorOccur = errorValidator(addressData);
 
     let payload = {
       addressLine: addressData.addressLine,
@@ -43,17 +53,16 @@ export default function AddAddress({navigation}) {
       state: addressData.state,
       country: addressData.country,
     };
-    dispatch(addAddressRequest({payload, navigation, token, getAddress}));
 
-    // if (
-    //   Object.keys(errorOccur).length === 0 &&
-    //   errorOccur.constructor === Object
-    // ) {
-    //   dispatch(addAddressRequest({payload, navigation, token, getAddress}));
-    //   setAddressData({...addressData, error: errorOccur});
-    // } else {
-    //   setAddressData({...addressData, error: errorOccur});
-    // }
+    if (
+      Object.keys(errorOccur).length === 0 &&
+      errorOccur.constructor === Object
+    ) {
+      dispatch(addAddressRequest({payload, navigation, token, getAddress}));
+      setAddressData({...addressData, error: errorOccur});
+    } else {
+      setAddressData({...addressData, error: errorOccur});
+    }
   };
 
   const getAddress = () => {

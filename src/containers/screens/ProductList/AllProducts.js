@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import ProductListFlatlist from './ProductListFlatlist';
 import {useDispatch, useSelector} from 'react-redux';
-import {productListRequest} from '../../../redux/action/action';
+import {
+  clearFilter,
+  filterCategory,
+  filterColor,
+  filterPrice,
+  filterRating,
+  productListRequest,
+} from '../../../redux/action/action';
 import {
   View,
   StyleSheet,
@@ -19,6 +26,15 @@ import {
   categoryData,
   colorData,
 } from '../../../component/JsonData';
+import Icon from 'react-native-vector-icons/Entypo';
+
+/**
+ *
+ * @param {*} param0 props in which contains navigation and information of Products category.
+ * @description This is a All Products List screen which shows all the products.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
 
 export default function AllProducts(props) {
   const dispatch = useDispatch();
@@ -26,85 +42,140 @@ export default function AllProducts(props) {
     state => state.productList.productListData,
   );
 
+  const displayData = useSelector(state => state.productList.displayData);
+
   const isLoading = useSelector(state => state.productList.isLoading);
 
-  const [cloneData, setCloneData] = useState(productListData);
+  // const [cloneData, setCloneData] = useState(productListData);
 
-  const [sortedData, setSortedData] = useState(cloneData);
+  // const [sortedData, setSortedData] = useState(cloneData);
+  // const [sortedData, setSortedData] = useState(di);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState({
     type: '',
     data: '',
   });
 
+  const [filterButton, setFilterButton] = useState(false);
 
-  useEffect(() => {
-    dispatch(productListRequest());
-    setSortedData(productListData);
-  }, []);
+  // useEffect(() => {
+  //   dispatch(productListRequest());
+  //   // setSortedData(productListData);
+  // }, []);
 
-  const handleSorting = (type, subType) => {
-    if (type === 'price') {
-      if (subType === 'high') {
-        setSortedData(
-          cloneData.sort(function (a, b) {
-            return b.price - a.price;
-          }),
-          setModalVisible(!modalVisible),
-        );
-      } else if (subType === 'low') {
-        setSortedData(
-          cloneData.sort(function (a, b) {
-            return a.price - b.price;
-          }),
-          setModalVisible(!modalVisible),
-        );
-      }
-    }
+  // const handleSorting = (type, subType) => {
+  //   if (type === 'price') {
+  //    if(data){
+  //     if (subType === 'high') {
+  //       setSortedData(
+  //         sortedData.sort(function (a, b) {
+  //           return b.price - a.price;
+  //         }),
+  //         setModalVisible(false),
+  //       );
+  //     } else if (subType === 'low') {
+  //       setSortedData(
+  //         sortedData.sort(function (a, b) {
+  //           return a.price - b.price;
+  //         }),
+  //         setModalVisible(false),
+  //       );
+  //     }
+  //    }else {
+  //     if (subType === 'high') {
+  //       setSortedData(
+  //         cloneData.sort(function (a, b) {
+  //           return b.price - a.price;
+  //         }),
+  //         setModalVisible(false),
+  //       );
+  //     } else if (subType === 'low') {
+  //       setSortedData(
+  //         cloneData.sort(function (a, b) {
+  //           return a.price - b.price;
+  //         }),
+  //         setModalVisible(false),
+  //       );
+  //     }
+  //   }
+  //   }
 
-    if (type === 'rating') {
-      if (subType === 'high') {
-        setSortedData(
-          cloneData.sort(function (a, b) {
-            return b.avgRating - a.avgRating;
-          }),
-          setModalVisible(!modalVisible),
-        );
-      } else if (subType === 'low') {
-        setSortedData(
-          cloneData.sort(function (a, b) {
-            return a.avgRating - b.avgRating;
-          }),
-          setModalVisible(!modalVisible),
-        );
-      }
-    }
+  //   if (type === 'rating') {
+  //     if(data){
+  //       if (subType === 'high') {
+  //         setSortedData(
+  //           sortedData.sort(function (a, b) {
+  //             return b.avgRating - a.avgRating;
+  //           }),
+  //           setModalVisible(false),
+  //         );
+  //       } else if (subType === 'low') {
+  //         setSortedData(
+  //           sortedData.sort(function (a, b) {
+  //             return a.avgRating - b.avgRating;
+  //           }),
+  //           setModalVisible(false),
+  //         );
+  //       }
+  //     }else{
+  //     if (subType === 'high') {
+  //       setSortedData(
+  //         cloneData.sort(function (a, b) {
+  //           return b.avgRating - a.avgRating;
+  //         }),
+  //         setModalVisible(false),
+  //       );
+  //     } else if (subType === 'low') {
+  //       setSortedData(
+  //         cloneData.sort(function (a, b) {
+  //           return a.avgRating - b.avgRating;
+  //         }),
+  //         setModalVisible(false),
+  //       );
+  //     }
+  //   }
+  //   }
 
-    if (type === 'Category') {
-      setModalVisible(!modalVisible);
-      if (subType === 'table') {
-        setSortedData(cloneData), setModalVisible(!modalVisible);
-      } else {
-        setSortedData('');
-        setModalVisible(!modalVisible);
-      }
-    }
+  //   if (type === 'Category') {
+  //     setModalVisible(!modalVisible);
+  //     setSortedData(
+  //       cloneData.filter(function (a) {
+  //         return a.category.name === subType;
+  //       }),
+  //     );
+  //   }
 
-    if (type === 'Color') {
-      setModalVisible(!modalVisible);
-      if (subType === 'yellow') {
-        setSortedData(
-          cloneData.sort(function (a) {
-            return a.color.name === 'yellow';
-          }),
-        ),
-          setModalVisible(!modalVisible);
-      } else {
-        setSortedData('');
-        setModalVisible(!modalVisible);
-      }
-    }
-  };
+  //   if (type === 'Color') {
+  //     setModalVisible(!modalVisible);
+  //     setSortedData(
+  //       cloneData.filter(function (a) {
+  //         return a.color.name === subType;
+  //       }),
+  //     );
+  //   }
+
+  // };
+
+  // const handleSorting = (type, subType) => {
+  //   if (type === 'Category') {
+  //     setModalVisible(!modalVisible);
+  //     setCloneData(
+  //       productListData.filter(function (a) {
+  //         return a.category.name === subType;
+  //       }),
+  //     );
+  //   }
+
+  //   if (type === 'Color') {
+  //     setModalVisible(!modalVisible);
+  //     setCloneData(
+  //       productListData.filter(function (a) {
+  //         return a.color.name === subType;
+  //       }),
+  //     );
+  //   }
+  // }
 
   const handleModal = type => {
     setModalVisible(true);
@@ -119,30 +190,65 @@ export default function AllProducts(props) {
     }
   };
 
-  useEffect(() => {
-    if (props.route.params.type === 'dashboardProduct') {
-      setSortedData('');
+  // useEffect(() => {
+  //   if (props.route.params.type === 'All') {
+  //     setSortedData(productListData);
+  //     // setCloneData(productListData)
+  //   } else {
+  //     setSortedData(
+  //       cloneData.filter(function (a) {
+  //         return a.category.name === props.route.params.type;
+  //       }),
+  //     );
+  //     // setCloneData(
+  //     //   cloneData.filter(function (a) {
+  //     //     return a.category.name === props.route.params.type;
+  //     //   }),
+  //     // );
+  //   }
+  // }, [props.route.params]);
+
+  const handleSorting = (type, subType) => {
+    setModalVisible(false);
+    if (type === 'Category') {
+      dispatch(filterCategory(subType));
     }
-  }, [props.route.params]);
+
+    if (type === 'Color') {
+      dispatch(filterColor(subType));
+    }
+
+    if (type === 'price') {
+      dispatch(filterPrice(subType));
+    }
+
+    if (type === 'rating') {
+      dispatch(filterRating(subType));
+    }
+  };
 
   return (
     <View style={styles.container}>
-      {sortedData.length === 0 ? null : (
+      {displayData?.length === 0 ? null : filterButton ? (
         <TouchableOpacity
           style={styles.clearFilterTouchable}
           onPress={() => {
             dispatch(productListRequest());
-            setSortedData(productListData);
+            // dispatch(clearFilter())
+            // setSortedData(productListData);
+            // setCloneData(productListData)
+            setFilterButton(false);
           }}>
           <Text style={styles.clearFilterText}>Clear Filter</Text>
         </TouchableOpacity>
-      )}
+      ) : null}
       {isLoading ? (
         <ActivityIndicator size={50} color={Colors.skyblue} />
       ) : (
         <ProductListFlatlist
-          productListData={sortedData}
+          productListData={displayData}
           navigation={props.navigation}
+          type="AllProducts"
         />
       )}
 
@@ -185,6 +291,13 @@ export default function AllProducts(props) {
             visible={modalVisible}>
             <View style={styles.modalContainer}>
               <View style={styles.modalView}>
+                <TouchableOpacity
+                  style={styles.crossTouchable}
+                  onPress={() => setModalVisible(false)}
+                  activeOpacity={0.9}>
+                  <Icon name="cross" size={30} />
+                </TouchableOpacity>
+
                 <View style={styles.headerView}>
                   <Text style={styles.headerText}>
                     Sort by {modalData.type}
@@ -197,9 +310,11 @@ export default function AllProducts(props) {
                     <TouchableOpacity
                       style={styles.flatlistTouchable}
                       activeOpacity={0.8}
-                      onPress={() =>
-                        handleSorting(modalData.type, item.subType)
-                      }>
+                      onPress={() => {
+                        handleSorting(modalData.type, item.subType);
+                        // dispatch(changeCategory(modalData.type, item.subType))
+                        setFilterButton(true);
+                      }}>
                       <Text style={styles.flatlistText}> {item.title} </Text>
                     </TouchableOpacity>
                   )}
@@ -262,6 +377,14 @@ const styles = StyleSheet.create({
     minHeight: '20%',
     width: '65%',
     maxHeight: '60%',
+  },
+  crossTouchable: {
+    borderRadius: 50,
+    backgroundColor: Colors.lightgray,
+    borderColor: Colors.lightgray,
+    position: 'absolute',
+    right: -12,
+    top: -10,
   },
   headerView: {
     justifyContent: 'center',

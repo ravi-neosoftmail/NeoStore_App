@@ -1,3 +1,11 @@
+/**
+ *
+ * @param {*} param0
+ * @description This is Constant which keep the naming consistent because all action types are gathered in a single place.
+ * @author Ravi Ranjan
+ * @returns the constant name
+ */
+
 // For Registration
 export const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST';
 export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
@@ -64,12 +72,22 @@ export const PLACEORDER_ERROR = 'PLACEORDER_ERROR';
 export const GETORDERLIST_REQUEST = 'GETORDERLIST_REQUEST';
 export const GETORDERLIST_SUCCESS = 'GETORDERLIST_SUCCESS';
 
-
 // Change Password
 export const CHANGEPASSWORD_REQUEST = 'CHANGEPASSWORD_REQUEST';
 export const CHANGEPASSWORD_SUCCESS = 'CHANGEPASSWORD_SUCCESS';
 export const CHANGEPASSWORD_ERROR = 'CHANGEPASSWORD_ERROR';
 
-
 // Change User Profile Image
 export const USERIMAGE_REQUEST = 'USERIMAGE_REQUEST';
+
+// Filter Product category
+export const FILTERCATEGORY = 'FILTERCATEGORY';
+
+// Filter Product color
+export const FILTERCOLOR = 'FILTERCOLOR';
+
+// Filter Product rating
+export const FILTERRATING = 'FILTERRATING';
+
+// Filter Product price
+export const FILTERPRICE = 'FILTERPRICE';

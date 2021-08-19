@@ -14,6 +14,17 @@ import getOrderListReducer from "./OrederListReducer";
 import placeOrderReducer from "./PlaceOrderReducer";
 import changeUserImageReducer from "./UserImageReducer";
 
+
+/**
+ *
+ * @param {*} param0
+ * @description This is root reducer which has combined all the reducers.
+ * @author Ravi Ranjan
+ * @returns the new state or update state.
+ */
+
+
+
 const rootReducer = combineReducers({
     productList  : productListReducer,
     registerData : registrationReducer,

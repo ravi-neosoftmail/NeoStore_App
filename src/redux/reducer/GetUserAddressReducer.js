@@ -8,6 +8,16 @@ import {
     isSuccess: false,
     userAddress: '',
   };
+
+
+/**
+ *
+ * @param {*} param0
+ * @description This is reducer which has some basic constraints on how that write logic function should work.
+ * @author Ravi Ranjan
+ * @returns the new state or update state.
+ */
+
   
   const getUserAddressReducer = (state = initialState, action) => {
     switch (action.type) {

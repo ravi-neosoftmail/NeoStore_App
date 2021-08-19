@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -12,18 +12,27 @@ import normalize from 'react-native-normalize';
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function ProductListFlatlist({productListData, navigation, type}) {
+/**
+ *
+ * @param {*} param0 props in which contains navigation and information of Products category nad also the type of product.
+ * @description This is a Products Flatlist screen which shows the UI of the prducts card.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
 
-
+export default function ProductListFlatlist({
+  productListData,
+  navigation,
+  type,
+}) {
   return (
     <View style={styles.container}>
       {productListData?.length === 0 ? (
         <Text style={styles.noProductsText}>No Products available</Text>
       ) : (
         <FlatList
-          data={type === 'dashboard' ? productListData?.slice(0,5) :productListData}
+          data={productListData}
           keyExtractor={item => item.id}
-
           renderItem={({item}) => (
             <TouchableOpacity
               style={styles.flatlistContainerView}
@@ -33,9 +42,7 @@ export default function ProductListFlatlist({productListData, navigation, type})
                   item,
                 })
               }>
-              <Image 
-                style={styles.image} 
-                source={{uri: item.mainImage}} />
+              <Image style={styles.image} source={{uri: item.mainImage}} />
               <View style={styles.detailsView}>
                 <View style={{}}>
                   <Text style={styles.textStyle}>{item.name}</Text>

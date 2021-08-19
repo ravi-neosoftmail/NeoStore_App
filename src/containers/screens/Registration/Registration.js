@@ -15,14 +15,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Colors} from '../../../assets/Colors';
 import {confirmPasswordValidator, errorValidator, firstNameValidator, lastNameValidator, mobileValidator, passwordValidator, emailValidator} from '../../../component/Validator';
 import RegistrationModal from './RegistartionModal';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {registrationRequest} from '../../../redux/action/action';
 
 
 /**
  * 
  * @param {*} param0 navigation which is used to navigate between screens.
- * @description This is a Registration screen which requires user identification and authentication, regularly performed by entering a username and password and more details combination.
+ * @description This is a Registration screen which requires user identification and authentication, regularly performed by entering user details combination.
  * @author Ravi Ranjan
  * @returns JSX element that describes how a section of the UI (User Interface) should appear.
  */

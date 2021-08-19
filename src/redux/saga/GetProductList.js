@@ -4,6 +4,15 @@ import { call, put } from "@redux-saga/core/effects";
 import { productListSuccess } from "../action/action";
 
 
+/**
+ *
+ * @param {*} param0 action which contains payloads of information.
+ * @description This is saga file which is  a middleware library that helps us with API calls or side effects
+ * @author Ravi Ranjan
+ * @returns the data coming from the API.
+ */
+
+
 export function* getProductList() {
     try{
         const response = yield call(async () => {

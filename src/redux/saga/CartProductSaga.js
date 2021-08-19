@@ -3,6 +3,17 @@ import {environment} from '../../assets/environment';
 import {call, put} from '@redux-saga/core/effects';
 import {getCartProductSuccess} from '../action/action';
 
+
+/**
+ *
+ * @param {*} param0 action which contains payloads of information.
+ * @description This is saga file which is  a middleware library that helps us with API calls or side effects
+ * @author Ravi Ranjan
+ * @returns the data coming from the API.
+ */
+
+
+
 export function* getCartProductSaga(action) {
   try {
     const response = yield call(async () => {
@@ -26,21 +37,21 @@ export function* addCartProductSaga(action) {
     const response = yield call(async () => {
       const result = await axios.post(
         `${environment.apiBase}/api/cart`,
-        action.payload,
+        action.payload.payload,
         {
           headers: {
-            Authorization: action.token,
+            Authorization: action.payload.token,
           },
         },
       );
       return result;
     });
     if (response.data.success) {
-      action.getCart();
+      action.payload.getCart(action.payload.type);
     }
   } catch (error) {
     console.log(error, error.response);
-    action.errorAlert(error.response.data.message)
+    action.payload.errorAlert(error.response.data.message, action.payload.type)
   }
 }
 

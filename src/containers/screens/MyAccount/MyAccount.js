@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Colors} from '../../../assets/Colors';
 import {Avatar} from 'react-native-paper';
@@ -6,6 +6,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AccountScreenTile from './AccountScreenTile';
 import normalize from 'react-native-normalize';
 import {useSelector} from 'react-redux';
+
+/**
+ *
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * @description This is My Account screen which shows the User Information details.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
 
 export default function MyAccount({navigation}) {
   const userData = useSelector(state => state.userData.user);

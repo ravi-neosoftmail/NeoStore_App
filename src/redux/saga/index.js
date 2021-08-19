@@ -33,6 +33,16 @@ import {
 import {getOrderListSaga, placeOrderSaga} from './OrderListSaga';
 import { changePasswordSaga } from './ChangePasswordSaga';
 
+
+/**
+ *
+ * @param {*} param0 action which contains payloads of information.
+ * @description This is saga file which is  a middleware library that helps us with API calls or side effects
+ * @author Ravi Ranjan
+ * @returns the data coming from the API.
+ */
+
+
 function* watchMan() {
   yield takeLatest(PRODUCTLIST_REQUEST, getProductList);
   yield takeLatest(REGISTRATION_REQUEST, userRegistration);

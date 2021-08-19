@@ -9,6 +9,15 @@ import Icon from 'react-native-vector-icons/Entypo';
 import {useDispatch, useSelector} from 'react-redux';
 import {Avatar} from 'react-native-paper';
 import { logoutRequest } from '../../../redux/action/action';
+import Toast from 'react-native-toast-message';
+
+/**
+ *
+ * @param {*} param0 props in which navigation is used to navigate between different screens.
+ * @description This is CustomDrawerContent component which is used to make the UI of drawer content.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a UI (User Interface) of the Drawer Content should appear.
+ */
 
 export default function CustomDrawerContent(props) {
   const dispatch = useDispatch();
@@ -25,6 +34,14 @@ export default function CustomDrawerContent(props) {
       {
         text: 'Logout',
         onPress: () => {
+          Toast.show({
+            position: 'bottom',
+            text1: 'Logout success',
+            visibilityTime: 3000,
+            autoHide: true,
+            topOffset: 30,
+            bottomOffset: 40,
+          });
           dispatch(logoutRequest())
           props.navigation.navigate('Dashboard');
         },

@@ -13,6 +13,17 @@ import {Colors} from '../../../assets/Colors';
 import {getCartProductRequest} from '../../../redux/action/action';
 import MyCartFlatlist from './MyCartFlatlist';
 
+
+/**
+ *
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * @description This is  My Cart screen which shows the user order products.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
+
 export default function MyCart({navigation}) {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userData.user);
@@ -59,6 +70,7 @@ export default function MyCart({navigation}) {
           </TouchableOpacity>
         </View>
       )}
+      <View style={{flex:0.15}}></View>
     </View>
   );
 }

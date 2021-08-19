@@ -14,6 +14,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import {updateAddressRequest} from '../../../redux/action/action';
 import {getUserAddressRequest} from '../../../redux/action/action';
 
+
+
+/**
+ * 
+ * @param {*} param0 Props which contains the user address that is going to be edit.
+ * @description This is a Edit address screen which requires user address data to modify the address.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function EditAddress(props) {
   const dispatch = useDispatch();
 
@@ -44,21 +55,17 @@ export default function EditAddress(props) {
       country: editAddress.country,
     };
 
-    dispatch(
-      updateAddressRequest({payload, token, id, navigation, getAddress}),
-    );
-
-    // if (
-    //   Object.keys(errorOccur).length === 0 &&
-    //   errorOccur.constructor === Object
-    // ) {
-    //   dispatch(
-    //     updateAddressRequest({payload, token, id, navigation, getAddress}),
-    //   );
-    //   setEditAddress({...editAddress, error: errorOccur});
-    // } else {
-    //   setEditAddress({...editAddress, error: errorOccur});
-    // }
+    if (
+      Object.keys(errorOccur).length === 0 &&
+      errorOccur.constructor === Object
+    ) {
+      dispatch(
+        updateAddressRequest({payload, token, id, navigation, getAddress}),
+      );
+      setEditAddress({...editAddress, error: errorOccur});
+    } else {
+      setEditAddress({...editAddress, error: errorOccur});
+    }
   };
 
   const getAddress = () => {

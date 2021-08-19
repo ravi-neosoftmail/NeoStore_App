@@ -12,6 +12,17 @@ import {Colors} from '../../../assets/Colors';
 import {getUserAddressRequest} from '../../../redux/action/action';
 import AddressFlatlist from './AddressFlatlist';
 
+
+/**
+ * 
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * @description This is a Shipping Address screen which shows all the user address.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
+
 export default function ShippingAddress({navigation}) {
   const dispatch = useDispatch();
 

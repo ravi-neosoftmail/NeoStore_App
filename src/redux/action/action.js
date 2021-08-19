@@ -39,9 +39,23 @@ import {
   CHANGEPASSWORD_SUCCESS,
   CHANGEPASSWORD_ERROR,
   USERIMAGE_REQUEST,
-  USERIMAGE_SUCCESS,
-  USERIMAGE_ERROR,
+  FILTERCATEGORY,
+  FILTERCOLOR,
+  FILTERPRICE,
+  FILTERRATING,
 } from '../constant/type';
+
+
+/**
+ * 
+ * @param {*} param0 
+ * @description This is a Redux Action which contains the payloads of information..
+ * @author Ravi Ranjan
+ * @returns the payload of information from application to store
+ */
+
+
+
 
 // For getting all product list
 export const productListRequest = () => {
@@ -224,18 +238,10 @@ export const getCartProductSuccess = payload => {
 
 // For Add cart product
 
-export const addCartProductRequest = ({
-  payload,
-  token,
-  getCart,
-  errorAlert,
-}) => {
+export const addCartProductRequest = (payload) => {
   return {
     type: ADDCARTPRODUCT_REQUEST,
     payload,
-    token,
-    getCart,
-    errorAlert,
   };
 };
 
@@ -370,3 +376,34 @@ export const changeUserImage = payload => {
     payload,
   };
 };
+
+
+export const filterCategory = payload => {
+  return {
+    type: FILTERCATEGORY,
+    payload,
+  };
+};
+
+
+export const filterColor= payload => {
+  return {
+    type: FILTERCOLOR,
+    payload,
+  };
+};
+
+export const filterPrice= payload => {
+  return {
+    type: FILTERPRICE,
+    payload,
+  };
+};
+
+export const filterRating= payload => {
+  return {
+    type: FILTERRATING,
+    payload,
+  };
+};
+

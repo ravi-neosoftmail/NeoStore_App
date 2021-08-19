@@ -4,6 +4,16 @@ import normalize from 'react-native-normalize';
 import {Colors} from '../../../assets/Colors';
 import RNFetchBlob from 'rn-fetch-blob'
 
+
+/**
+ *
+ * @param {*} param0 props in which navigation and information of order details of delivered products.
+ * @description This is a Order Details screen which has option to download the invoice of delivered products.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function OrderDetails(props) {
   const {name, id, price, mainImage} = props.route.params.item.items[0].productId;
 

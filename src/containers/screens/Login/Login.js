@@ -39,24 +39,22 @@ export default function Login({navigation}) {
 
 
   const handleLogin = () => {
-    // let errorOccur = errorValidator(loginData);
+    let errorOccur = errorValidator(loginData);
 
     let payload = {
       email: loginData.email,
       password: loginData.password,
     };
 
-    dispatch(loginRequest({payload, navigation, getError}));
-
-    //   if (
-    //     Object.keys(errorOccur).length === 0 &&
-    //     errorOccur.constructor === Object
-    //   ) {
-    //     dispatch(loginRequest({payload, navigation, getError}))
-    //     setLoginData({ ...loginData, error: errorOccur });
-    //   } else {
-    //     setLoginData({ ...loginData, error: errorOccur });
-    //   }
+      if (
+        Object.keys(errorOccur).length === 0 &&
+        errorOccur.constructor === Object
+      ) {
+        dispatch(loginRequest({payload, navigation, getError}))
+        setLoginData({ ...loginData, error: errorOccur });
+      } else {
+        setLoginData({ ...loginData, error: errorOccur });
+      }
   };
 
   const getError = message => {

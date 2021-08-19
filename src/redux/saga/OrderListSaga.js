@@ -4,6 +4,16 @@ import { call, put } from "@redux-saga/core/effects";
 import { getOrderListSuccess } from "../action/action";
 
 
+
+/**
+ *
+ * @param {*} param0 action which contains payloads of information.
+ * @description This is saga file which is  a middleware library that helps us with API calls or side effects
+ * @author Ravi Ranjan
+ * @returns the data coming from the API.
+ */
+
+
 export function* getOrderListSaga(action) {
     try{
         const response = yield call(async () => {

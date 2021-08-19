@@ -3,11 +3,21 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import normalize from "react-native-normalize";
 import GenericTextInput from "../../../component/GenericTextInput";
 import GenericButton from "../../../component/GenericButton";
-import { ConfirmNewPasswordValidator, newPasswordValidator, passwordValidator } from "../../../component/Validator";
+import { ConfirmNewPasswordValidator, errorValidator, newPasswordValidator, passwordValidator } from "../../../component/Validator";
 import { changePasswordRequest } from "../../../redux/action/action";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function SetPassword({ navigation }) {
+
+/**
+ * 
+ * @param {*} param0 
+ * @description This is a Change Password screen which requires user identification and authentication, regularly performed by entering user old password and new password combination.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
+export default function SetPassword() {
 
   const dispatch = useDispatch();
 
@@ -27,22 +37,24 @@ export default function SetPassword({ navigation }) {
 
 
   const handleResetPassword = () => {
+    let errorOccur = errorValidator(resetData);
+
     let payload = {
       password: resetData.password,
       newPassword: resetData.newPassword
     };
 
-      dispatch(changePasswordRequest({payload, token, getMessage}));
+      // dispatch(changePasswordRequest({payload, token, getMessage}));
 
-    // if (
-    //   Object.keys(errorOccur).length === 0 &&
-    //   errorOccur.constructor === Object
-    // ) {
-    //   dispatch(changePasswordRequest({payload, token, getMessage}));
-    //   setResetData({...resetData, error: errorOccur});
-    // } else {
-    //   setResetData({...resetData, error: errorOccur});
-    // }
+    if (
+      Object.keys(errorOccur).length === 0 &&
+      errorOccur.constructor === Object
+    ) {
+      dispatch(changePasswordRequest({payload, token, getMessage}));
+      setResetData({...resetData, error: errorOccur});
+    } else {
+      setResetData({...resetData, error: errorOccur});
+    }
   }
 
   const getMessage = (message) => {

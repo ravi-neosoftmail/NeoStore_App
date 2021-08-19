@@ -11,6 +11,16 @@ import {Colors} from '../../../assets/Colors';
 import normalize from 'react-native-normalize';
 import { ratingData } from '../../../component/JsonData';
 
+
+/**
+ *
+ * @param {*} param0 props in which contains navigation and information of Products category.
+ * @description This is a All Products List screen which shows all the products.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function ProductListModal(props) {
   
   return (

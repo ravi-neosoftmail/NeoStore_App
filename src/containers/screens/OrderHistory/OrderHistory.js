@@ -5,6 +5,18 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Colors} from '../../../assets/Colors';
 import {getOrderListRequest} from '../../../redux/action/action';
 
+
+
+/**
+ *
+ * @param {*} param0 navigation which is used to navigate between different screens.
+ * @description This is a Order History screen which has the details of all place order of User.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
+
 export default function OrderHistory({navigation}) {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userData.user);

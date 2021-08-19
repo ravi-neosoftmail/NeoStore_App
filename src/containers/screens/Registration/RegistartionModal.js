@@ -11,6 +11,17 @@ import normalize from "react-native-normalize";
 import Icon from "react-native-vector-icons/Entypo";
 import { Colors } from "../../../assets/Colors";
 
+
+/**
+ *
+ * @param {*} param0 maodalVisible which contains the maodal value true or false.
+ * setMaodalVisible which is used to set the maodal value true or false.
+ * @description This is a Registration Modal component which shows the terms and conditions.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 const RegistrationModal = ({ modalVisible, setModalVisible }) => {
   return (
     <View style={styles.centeredView}>

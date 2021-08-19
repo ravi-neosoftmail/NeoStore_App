@@ -12,6 +12,16 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 import {useSelector} from 'react-redux';
 import {Colors} from '../../../assets/Colors';
 
+
+/**
+ * 
+ * @param {*} param0 navigation which is used to navigate between screens.
+ * @description This is a Search screen in which we have to search the different products.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a section of the UI (User Interface) should appear.
+ */
+
+
 export default function Search({navigation}) {
   const productListData = useSelector(
     state => state.productList.productListData,

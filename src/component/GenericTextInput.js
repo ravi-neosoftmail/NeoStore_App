@@ -10,6 +10,17 @@ import normalize from 'react-native-normalize';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Colors} from '../assets/Colors';
 
+
+
+/**
+ *
+ * @param {*} param0 props in which all the functionality of TextInput is provided by the child.
+ * @description This is Generic Text Input component which is used for code reusability.
+ * @author Ravi Ranjan
+ * @returns JSX element that describes how a UI (User Interface) of the Text Input should appear.
+ */
+
+
 export default function GenericTextInput(props) {
   return (
     <View style={styles.container}>
