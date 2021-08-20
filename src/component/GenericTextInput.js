@@ -44,6 +44,8 @@ export default function GenericTextInput(props) {
           secureTextEntry={props.secure}
           value={props.value}
           onChangeText={props.onChangeText}
+          placeholderTextColor={Colors.gray}
+          color='black'
         />
         {props.type === 'password' ? (
           <TouchableOpacity
@@ -70,7 +72,6 @@ const styles = StyleSheet.create({
   },
   textInputView: {
     flexDirection: 'row',
-    // borderWidth: 1,
     alignItems: 'center',
     paddingLeft: 10,
     borderRadius: 10,
@@ -84,6 +85,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
+    // textDecorationColor:'black'
   },
   textInput: {
     height: normalize(50),

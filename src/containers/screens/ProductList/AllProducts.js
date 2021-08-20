@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ProductListFlatlist from './ProductListFlatlist';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+  clearAllFilter,
   clearFilter,
   filterCategory,
   filterColor,
@@ -60,7 +61,7 @@ export default function AllProducts(props) {
   const [filterButton, setFilterButton] = useState(false);
 
   // useEffect(() => {
-  //   dispatch(productListRequest());
+  //   // dispatch(productListRequest());
   //   // setSortedData(productListData);
   // }, []);
 
@@ -234,6 +235,7 @@ export default function AllProducts(props) {
           style={styles.clearFilterTouchable}
           onPress={() => {
             dispatch(productListRequest());
+            // dispatch(clearAllFilter())
             // dispatch(clearFilter())
             // setSortedData(productListData);
             // setCloneData(productListData)

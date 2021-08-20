@@ -5,6 +5,8 @@ import {
   FILTERCOLOR,
   FILTERPRICE,
   FILTERRATING,
+  DASHBOARDFILTER,
+  CLEARALLFILTER,
 } from '../constant/type';
 
 const initialState = {
@@ -12,6 +14,9 @@ const initialState = {
   productListData: '',
   displayData: '',
   cloneData: '',
+  topProducts:'',
+  filterData:'',
+  clearFilterData:''
 };
 
 
@@ -36,7 +41,9 @@ const productListReducer = (state = initialState, action) => {
       return {
         isLoading: false,
         productListData: action.payload,
+        filterData: action.payload,
         displayData: action.payload,
+        clearFilterData: action.payload
       };
     }
 
@@ -55,7 +62,7 @@ const productListReducer = (state = initialState, action) => {
     case FILTERCOLOR: {
       return {
         ...state,
-        displayData: state.cloneData.filter(item => {
+        displayData: state.cloneData?.filter(item => {
           return item.color.name === action.payload;
         }),
       };
@@ -64,7 +71,7 @@ const productListReducer = (state = initialState, action) => {
     case FILTERPRICE: {
       return {
         ...state,
-        displayData: state.displayData.sort(function (a, b) {
+        displayData: state.displayData?.sort(function (a, b) {
           if (action.payload === 'high') {
             return b.price - a.price;
           } else if (action.payload === 'low') {
@@ -77,7 +84,7 @@ const productListReducer = (state = initialState, action) => {
     case FILTERRATING: {
       return {
         ...state,
-        displayData: state.displayData.sort(function (a, b) {
+        displayData: state.displayData?.sort(function (a, b) {
           if (action.payload === 'high') {
             return b.avgRating - a.avgRating;
           } else if (action.payload === 'low') {
@@ -86,6 +93,23 @@ const productListReducer = (state = initialState, action) => {
         }),
       };
     }
+
+    case DASHBOARDFILTER: {
+      return {
+        ...state,
+        topProducts: state.filterData?.filter(item => {
+          return item.avgRating >= 4;
+        })
+      };
+    }
+
+    case CLEARALLFILTER: {
+      return {
+        ...state,
+        displayData: state.clearFilterData
+      };
+    }
+
     default:
       return state;
   }

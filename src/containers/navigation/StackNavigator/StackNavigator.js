@@ -23,8 +23,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import OrderDetails from '../../screens/OrderHistory/OrderDetails';
 import PlaceOrder from '../../screens/MyCart/PlaceOrder';
 import Search from '../../screens/SearchBox/Search';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ZoomImage from '../../screens/ProductList/ZoomImage';
+import { getCartProductRequest } from '../../../redux/action/action';
 
 
 /**
@@ -79,13 +80,14 @@ const CartDetails = ({navigation, count, isLoggedIn}) => {
 };
 
 export default function StackNavigation({navigation}) {
+
   const cart = useSelector(state => state.cartProduct.cartProduct);
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const isLoggedIn = useSelector(state => state.userData.isLoggedIn);
 
-  useEffect(() => {
-    setCount(cart?.products?.length);
-  }, [cart]);
+  // useEffect(() => {
+  //   setCount(cart?.products?.length);
+  // }, [cart]);
 
   return (
     <Stack.Navigator
@@ -124,7 +126,7 @@ export default function StackNavigation({navigation}) {
           headerShown: true,
           headerLeft: () => <DrawerHeader navigation={navigation} />,
           headerRight: () => (
-            <CartDetails navigation={navigation} count={count} isLoggedIn={isLoggedIn}/>
+            <CartDetails navigation={navigation} count={cart?.products?.length} isLoggedIn={isLoggedIn}/>
           ),
         }}
       />
@@ -155,7 +157,7 @@ export default function StackNavigation({navigation}) {
       options={{
         // headerTitle: 'Dashboard',
         headerRight: () => (
-          <CartDetails navigation={navigation} count={count} isLoggedIn={isLoggedIn}/>
+          <CartDetails navigation={navigation} count={cart?.products?.length} isLoggedIn={isLoggedIn}/>
         ),
             headerShown: true,
       }}

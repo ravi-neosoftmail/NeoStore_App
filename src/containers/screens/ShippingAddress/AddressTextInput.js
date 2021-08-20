@@ -23,6 +23,8 @@ export default function AddressTextInput(props) {
         keyboardType={props.keyboardType}
         value={props.value}
         onChangeText={props.onChangeText}
+        placeholderTextColor={Colors.gray}
+          color='black'
       />
       {props.error?
       <Text style={styles.errorText}>{props.error}</Text>

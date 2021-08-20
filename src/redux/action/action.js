@@ -43,6 +43,8 @@ import {
   FILTERCOLOR,
   FILTERPRICE,
   FILTERRATING,
+  DASHBOARDFILTER,
+  CLEARALLFILTER,
 } from '../constant/type';
 
 
@@ -407,3 +409,16 @@ export const filterRating= payload => {
   };
 };
 
+
+export const dashboardFilter= () => {
+  return {
+    type: DASHBOARDFILTER,
+  };
+};
+
+
+export const clearAllFilter= () => {
+  return {
+    type: CLEARALLFILTER,
+  };
+};

@@ -11,7 +11,7 @@ import {SliderBox} from 'react-native-image-slider-box';
 import ProductListFlatlist from '../ProductList/ProductListFlatlist';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {filterCategory, productListRequest} from '../../../redux/action/action';
+import {dashboardFilter, filterCategory, getCartProductRequest, productListRequest} from '../../../redux/action/action';
 import {Colors} from '../../../assets/Colors';
 import Swiper from 'react-native-swiper';
 
@@ -28,20 +28,37 @@ export default function Dashboard({navigation}) {
   const productListData = useSelector(
     state => state.productList.productListData,
   );
+
+  const topProducts = useSelector(
+    state => state.productList.topProducts,
+  );
+
   const isLoading = useSelector(state => state.productList.isLoading);
-  const [cloneData, setCloneData] = useState(productListData);
+  // const [cloneData, setCloneData] = useState(productListData);
+
+  // console.log(cloneData.length, 'cloneData');
 
   useEffect(() => {
     dispatch(productListRequest());
   }, []);
 
-  useEffect(() => {
-    setCloneData(
-      cloneData.sort(function (a, b) {
-        return b.avgRating - a.avgRating;
-      }),
-    );
-  }, [productListData]);
+  useEffect(()=>{
+    if(productListData){
+    dispatch(dashboardFilter())
+    }
+  }, [productListData])
+
+  // useEffect(() => {
+    // if(productListData){
+    //   setCloneData(
+    //     cloneData.sort(function (a, b) {
+    //       return b.avgRating - a.avgRating;
+    //     }),
+    //   );
+    // }
+
+     
+  // }, [productListData]);
 
   return (
     <View style={styles.container}>
@@ -54,7 +71,7 @@ export default function Dashboard({navigation}) {
           <Text style={{color: Colors.gray}}>Search Product </Text>
         </View>
       </TouchableOpacity>
-      <View style={{width: '100%', height: 300}}>
+      <View style={{width: '100%', height: 260}}>
         <Swiper autoplay loop height={250}>
           <TouchableOpacity
             // onPress={() => navigation.navigate('All Products', {type: 'Bed'})}
@@ -133,7 +150,7 @@ export default function Dashboard({navigation}) {
         />
       ) : (
         <ProductListFlatlist
-          productListData={cloneData.slice(0, 5)}
+          productListData={topProducts}
           navigation={navigation}
           type="dashboard"
         />
@@ -182,7 +199,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(128, 128, 128, 0.92)',
   },
   productsHeaderView: {
-    marginTop: 10,
+    // marginTop: 10,
   },
   productsHeaderText: {
     fontSize: 20,

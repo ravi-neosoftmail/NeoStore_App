@@ -91,3 +91,7 @@ export const FILTERRATING = 'FILTERRATING';
 
 // Filter Product price
 export const FILTERPRICE = 'FILTERPRICE';
+
+export const CLEARALLFILTER = 'CLEARALLFILTER'
+
+export const DASHBOARDFILTER = 'DASHBOARDFILTER'

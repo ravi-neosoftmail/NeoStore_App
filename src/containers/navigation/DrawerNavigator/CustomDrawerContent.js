@@ -8,7 +8,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/Entypo';
 import {useDispatch, useSelector} from 'react-redux';
 import {Avatar} from 'react-native-paper';
-import { logoutRequest } from '../../../redux/action/action';
+import { logoutRequest, productListRequest } from '../../../redux/action/action';
 import Toast from 'react-native-toast-message';
 
 /**
@@ -117,6 +117,7 @@ export default function CustomDrawerContent(props) {
           )}
           label="All Products"
           onPress={() => {
+            dispatch(productListRequest())
             props.navigation.navigate('All Products');
           }}
         />
