@@ -45,24 +45,31 @@ export default function OrderHistory({navigation}) {
             onPress={() => navigation.navigate('Order Details', {item})}>
             <View style={styles.idView}>
               <Text style={styles.idText}>
-                Order Id : {item.items[0].productId.id}
+                Order Id : {item.id}
               </Text>
             </View>
 
             <View style={styles.middleView}>
               <View style={styles.descriptionView}>
-                <Text style={styles.textStyle}>
-                  {item.items[0].productId.name}
-                </Text>
+                <FlatList 
+                  data={item.items}
+                  keyExtractor = {item => item.id}
+                  renderItem={ ({item}) => (
+                    <Text style={[styles.textStyle, {marginBottom:normalize(10)}]}>
+                      {item.productId.name}
+                  </Text>
+                  )}
+                />
+                
               </View>
 
-              <View style={styles.separatorLine}></View>
+              {/* <View style={styles.separatorLine}></View>
 
               <View style={styles.priceView}>
                 <Text style={styles.textStyle}>
                   Rs.{item.items[0].productId.price}
                 </Text>
-              </View>
+              </View> */}
             </View>
 
             <View style={styles.bottomView}>
@@ -114,8 +121,8 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.lightgray,
   },
   descriptionView: {
-    width: '70%',
     padding: normalize(10),
+    paddingBottom:0
   },
   textStyle: {
     fontSize: normalize(15),

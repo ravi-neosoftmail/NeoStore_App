@@ -19,13 +19,15 @@ export default function MyAccount({navigation}) {
   const userData = useSelector(state => state.userData.user);
   const userImage = useSelector(state => state.userImage.userImage);
 
+  console.log(userImage, 'userImage', userImage.length);
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainerView}>
         <View style={styles.profileView}>
           <Avatar.Image
             source={{
-              uri: userImage,
+              uri: userImage.length? userImage : 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-21.jpg',
             }}
             size={100}
             backgroundColor="white"

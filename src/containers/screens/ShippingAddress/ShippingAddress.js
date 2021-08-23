@@ -25,7 +25,6 @@ import AddressFlatlist from './AddressFlatlist';
 
 export default function ShippingAddress({navigation}) {
   const dispatch = useDispatch();
-
   const userAddress = useSelector(state => state.userAddress.userAddress);
   const isLoading = useSelector(state => state.userAddress.isLoading);
   const userData = useSelector(state => state.userData.user);

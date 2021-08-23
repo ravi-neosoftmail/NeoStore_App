@@ -8,7 +8,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/Entypo';
 import {useDispatch, useSelector} from 'react-redux';
 import {Avatar} from 'react-native-paper';
-import { logoutRequest, productListRequest } from '../../../redux/action/action';
+import { clearUserAddress, logoutRequest, productListRequest } from '../../../redux/action/action';
 import Toast from 'react-native-toast-message';
 
 /**
@@ -43,6 +43,7 @@ export default function CustomDrawerContent(props) {
             bottomOffset: 40,
           });
           dispatch(logoutRequest())
+          dispatch(clearUserAddress())
           props.navigation.navigate('Dashboard');
         },
       },
@@ -56,7 +57,7 @@ export default function CustomDrawerContent(props) {
           <View style={styles.loggedInProfileView}>
             <Avatar.Image
               source={{
-                uri: userImage,
+                uri: userImage.length? userImage : 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-21.jpg',
               }}
               size={60}
               style={{backgroundColor:Colors.white}}

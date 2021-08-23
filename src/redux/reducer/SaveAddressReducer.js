@@ -1,9 +1,10 @@
 import {
+    CLEARADDRESS,
     SAVEUSERADDRESSREQUEST
   } from '../constant/type';
   
   const initialState = {
-    deliveryAddress: {},
+    deliveryAddress: '',
   };
 
 
@@ -21,6 +22,11 @@ import {
       case SAVEUSERADDRESSREQUEST: {
         return {...initialState, deliveryAddress: action.payload};
       }
+
+      case CLEARADDRESS: {
+        return {...initialState};
+      }
+
       default:
         return state;
     }

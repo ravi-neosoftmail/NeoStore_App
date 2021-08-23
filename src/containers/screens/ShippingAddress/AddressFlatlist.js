@@ -13,9 +13,8 @@ import {Colors} from '../../../assets/Colors';
 import {delAddressRequest, saveUserAddress} from '../../../redux/action/action';
 import {getUserAddressRequest} from '../../../redux/action/action';
 
-
 /**
- * 
+ *
  * @param {*} param0 navigation which is used to navigate between screens.
  * userAddress which contains the user address data.
  * @description This is a Address Flatlist screen which shows the UI of all the Users Address.
@@ -26,6 +25,9 @@ import {getUserAddressRequest} from '../../../redux/action/action';
 export default function AddressFlatlist({userAddress, navigation}) {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userData.user);
+  const cart = useSelector(state => state.cartProduct.cartProduct);
+
+
   const {token} = userData;
 
   const showAlert = id => {
@@ -64,9 +66,16 @@ export default function AddressFlatlist({userAddress, navigation}) {
                 id: item._id,
               };
               dispatch(saveUserAddress(payload));
-              navigation.navigate('Place Order');
+              {
+                cart?.products?.length >= 1
+                  ? navigation.navigate('Place Order')
+                  : Alert.alert('Add some Product in Cart first', '', [
+                      {
+                        text: 'Ok',
+                      },
+                    ]);
+              }
             }}>
-              {console.log(item,'item')}
             <View style={styles.addressView}>
               <Text style={styles.addressText}>
                 {item.addressLine}, {item.state} - {item.pincode},{' '}

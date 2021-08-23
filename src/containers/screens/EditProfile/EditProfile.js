@@ -69,7 +69,7 @@ export default function EditProfile() {
         <View style={styles.avatarView}>
           <Avatar.Image
             source={{
-              uri: userImage,
+              uri: userImage.length? userImage : 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-21.jpg',
             }}
             size={100}
             backgroundColor="white"

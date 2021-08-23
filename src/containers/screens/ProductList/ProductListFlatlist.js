@@ -20,11 +20,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
  * @returns JSX element that describes how a section of the UI (User Interface) should appear.
  */
 
-export default function ProductListFlatlist({
-  productListData,
-  navigation,
-  type,
-}) {
+export default function ProductListFlatlist({productListData,navigation}) {
   return (
     <View style={styles.container}>
       {productListData?.length === 0 ? (

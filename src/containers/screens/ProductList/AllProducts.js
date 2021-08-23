@@ -230,7 +230,7 @@ export default function AllProducts(props) {
 
   return (
     <View style={styles.container}>
-      {displayData?.length === 0 ? null : filterButton ? (
+      {displayData?.length === 0 || filterButton ? (
         <TouchableOpacity
           style={styles.clearFilterTouchable}
           onPress={() => {

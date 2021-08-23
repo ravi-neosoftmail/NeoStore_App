@@ -45,6 +45,7 @@ import {
   FILTERRATING,
   DASHBOARDFILTER,
   CLEARALLFILTER,
+  CLEARADDRESS,
 } from '../constant/type';
 
 
@@ -307,6 +308,12 @@ export const saveUserAddress = payload => {
   return {
     type: SAVEUSERADDRESSREQUEST,
     payload,
+  };
+};
+
+export const clearUserAddress = () => {
+  return {
+    type: CLEARADDRESS,
   };
 };
 

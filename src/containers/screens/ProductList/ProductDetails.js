@@ -63,8 +63,8 @@ export default function ProductDetails(props) {
     console.log(name, mainImage);
     try {
       await Share.share({
-        url: mainImage,
-        // message: name,
+        // url: mainImage,
+        message: name,
       });
     } catch (error) {
       alert(error.message);

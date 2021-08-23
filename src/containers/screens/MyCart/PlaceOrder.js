@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -36,8 +36,14 @@ export default function PlaceOrder({navigation}) {
   const userData = useSelector(state => state.userData.user);
   const userAddress = useSelector(state => state.userAddress.userAddress);
   const {token} = userData;
-
   const [modalVisible, setModalVisible] = useState(false);
+
+  console.log(userAddress, 'userAddressuserAddress');
+  console.log(
+    deliveryAddress,
+    'deliveryAddress',
+    Object.keys(deliveryAddress).length,
+  );
 
   const handlePlaceOrder = () => {
     if (userAddress?.address?.length === 0) {
@@ -46,11 +52,7 @@ export default function PlaceOrder({navigation}) {
       let payload = {
         addressId: deliveryAddress.id,
       };
-
-    console.log(deliveryAddress, payload);
-
-
-      // dispatch(placeOrderRequest({payload, token, getOrder}));
+      dispatch(placeOrderRequest({payload, token, getOrder}));
     }
   };
 
@@ -63,7 +65,7 @@ export default function PlaceOrder({navigation}) {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.changeAddressView}>
-          {userAddress?.address?.length === 0 ? null : (
+          {Object.keys(deliveryAddress).length === 0 || userAddress?.address?.length === 0 ? null : (
             <View style={styles.addressView}>
               <Text style={styles.addressText}>
                 {deliveryAddress.address}, {deliveryAddress.state} -{' '}
@@ -73,8 +75,8 @@ export default function PlaceOrder({navigation}) {
           )}
           <GenericButton
             title={
-              Object.keys(deliveryAddress).length ||
-              userAddress.address.length === 0
+              userAddress?.address?.length === 0 ||
+              Object.keys(deliveryAddress).length === 0
                 ? 'Add Address'
                 : 'Change Address'
             }
@@ -84,13 +86,6 @@ export default function PlaceOrder({navigation}) {
 
         <PlaceOrderFlatlist />
       </ScrollView>
-
-      {/* <Button
-      title='pesss'
-      onPress={() => setModalVisible(true)}
-    > */}
-
-      {/* </Button> */}
       <TouchableOpacity
         style={styles.placeOrderTouchable}
         activeOpacity={0.8}

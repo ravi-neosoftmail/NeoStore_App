@@ -43,7 +43,8 @@ const productListReducer = (state = initialState, action) => {
         productListData: action.payload,
         filterData: action.payload,
         displayData: action.payload,
-        clearFilterData: action.payload
+        clearFilterData: action.payload,
+        cloneData:action.payload
       };
     }
 
@@ -106,7 +107,8 @@ const productListReducer = (state = initialState, action) => {
     case CLEARALLFILTER: {
       return {
         ...state,
-        displayData: state.clearFilterData
+        // displayData: state.clearFilterData,
+        // cloneData: state.clearFilterData
       };
     }
 

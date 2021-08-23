@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,11 +7,14 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {SliderBox} from 'react-native-image-slider-box';
 import ProductListFlatlist from '../ProductList/ProductListFlatlist';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {dashboardFilter, filterCategory, getCartProductRequest, productListRequest} from '../../../redux/action/action';
+import {
+  dashboardFilter,
+  filterCategory,
+  productListRequest,
+} from '../../../redux/action/action';
 import {Colors} from '../../../assets/Colors';
 import Swiper from 'react-native-swiper';
 
@@ -29,36 +32,19 @@ export default function Dashboard({navigation}) {
     state => state.productList.productListData,
   );
 
-  const topProducts = useSelector(
-    state => state.productList.topProducts,
-  );
+  const topProducts = useSelector(state => state.productList.topProducts);
 
   const isLoading = useSelector(state => state.productList.isLoading);
-  // const [cloneData, setCloneData] = useState(productListData);
-
-  // console.log(cloneData.length, 'cloneData');
 
   useEffect(() => {
     dispatch(productListRequest());
   }, []);
 
-  useEffect(()=>{
-    if(productListData){
-    dispatch(dashboardFilter())
+  useEffect(() => {
+    if (productListData) {
+      dispatch(dashboardFilter());
     }
-  }, [productListData])
-
-  // useEffect(() => {
-    // if(productListData){
-    //   setCloneData(
-    //     cloneData.sort(function (a, b) {
-    //       return b.avgRating - a.avgRating;
-    //     }),
-    //   );
-    // }
-
-     
-  // }, [productListData]);
+  }, [productListData]);
 
   return (
     <View style={styles.container}>
@@ -74,13 +60,10 @@ export default function Dashboard({navigation}) {
       <View style={{width: '100%', height: 260}}>
         <Swiper autoplay loop height={250}>
           <TouchableOpacity
-            // onPress={() => navigation.navigate('All Products', {type: 'Bed'})}
             onPress={() => {
-              dispatch(filterCategory('Bed'))
-              navigation.navigate('All Products')
-            }}
-
-            >
+              dispatch(filterCategory('Bed'));
+              navigation.navigate('All Products');
+            }}>
             <Image
               style={styles.swiperImage}
               source={require('../../../assets/Images/bed.jpeg')}
@@ -89,15 +72,10 @@ export default function Dashboard({navigation}) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            // onPress={() =>
-            //   navigation.navigate('All Products', {type: 'Chair'})
-            // }
             onPress={() => {
-              dispatch(filterCategory('Chair'))
-              navigation.navigate('All Products')
-            }}
-
-            >
+              dispatch(filterCategory('Chair'));
+              navigation.navigate('All Products');
+            }}>
             <Image
               style={styles.swiperImage}
               source={require('../../../assets/Images/Chair.png')}
@@ -106,13 +84,10 @@ export default function Dashboard({navigation}) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            // onPress={() => navigation.navigate('All Products', {type: 'Sofa'})}
             onPress={() => {
-              dispatch(filterCategory('Sofa'))
-              navigation.navigate('All Products')
-            }}
-
-            >
+              dispatch(filterCategory('Sofa'));
+              navigation.navigate('All Products');
+            }}>
             <Image
               style={styles.swiperImage}
               source={require('../../../assets/Images/Sofa.jpeg')}
@@ -121,15 +96,10 @@ export default function Dashboard({navigation}) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            // onPress={() =>
-            //   navigation.navigate('All Products', {type: 'Table'})
-            // }
             onPress={() => {
-              dispatch(filterCategory('Table'))
-              navigation.navigate('All Products')
-            }}
-
-            >
+              dispatch(filterCategory('Table'));
+              navigation.navigate('All Products');
+            }}>
             <Image
               style={styles.swiperImage}
               source={require('../../../assets/Images/Table.jpeg')}
@@ -143,11 +113,9 @@ export default function Dashboard({navigation}) {
         <Text style={styles.productsHeaderText}> Top Products for you </Text>
       </View>
       {isLoading ? (
-        <ActivityIndicator
-          size={30}
-          color={Colors.skyblue}
-          style={{alignSelf: 'center'}}
-        />
+        <View style={styles.loaderView}>
+          <ActivityIndicator size={30} color={Colors.skyblue} />
+        </View>
       ) : (
         <ProductListFlatlist
           productListData={topProducts}
@@ -198,14 +166,23 @@ const styles = StyleSheet.create({
     margin: 0,
     backgroundColor: 'rgba(128, 128, 128, 0.92)',
   },
-  productsHeaderView: {
-    // marginTop: 10,
-  },
+  productsHeaderView: {},
   productsHeaderText: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   swiperImage: {
+    height: '100%',
+    width: '100%',
+  },
+  loaderView: {
+    flex: 1,
+    backgroundColor: 'white',
+    opacity: 0.5,
+    borderWidth: 2,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '100%',
     width: '100%',
   },
