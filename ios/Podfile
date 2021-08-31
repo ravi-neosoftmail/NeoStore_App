@@ -16,7 +16,7 @@ target 'NeoStore_App' do
   )
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
-
+  pod 'Firebase/Analytics'
   target 'NeoStore_AppTests' do
     inherit! :complete
     # Pods for testing

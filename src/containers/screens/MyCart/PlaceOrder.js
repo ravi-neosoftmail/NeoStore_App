@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 import GenericButton from '../../../component/GenericButton';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,6 +17,9 @@ import {
   placeOrderRequest,
 } from '../../../redux/action/action';
 import OrderSuccessModal from './OrderSuccessModal';
+import RazorpayCheckout from 'react-native-razorpay';
+import PushNotification from 'react-native-push-notification';
+import Toast from 'react-native-toast-message';
 
 /**
  *
@@ -37,35 +39,71 @@ export default function PlaceOrder({navigation}) {
   const userAddress = useSelector(state => state.userAddress.userAddress);
   const {token} = userData;
   const [modalVisible, setModalVisible] = useState(false);
-
-  console.log(userAddress, 'userAddressuserAddress');
-  console.log(
-    deliveryAddress,
-    'deliveryAddress',
-    Object.keys(deliveryAddress).length,
-  );
-
-  const handlePlaceOrder = () => {
-    if (userAddress?.address?.length === 0) {
-      alert('Please add address first');
-    } else {
-      let payload = {
-        addressId: deliveryAddress.id,
-      };
-      dispatch(placeOrderRequest({payload, token, getOrder}));
-    }
-  };
+  const cart = useSelector(state => state.cartProduct.cartProduct);
+  const {products, grandTotal} = cart;
 
   const getOrder = () => {
     dispatch(getOrderListRequest(token));
     setModalVisible(true);
   };
 
+  const handlePayment = () => {
+    var options = {
+      description: 'Product Order Details',
+      image: products[0].productId.mainImage,
+      currency: 'INR',
+      key: 'rzp_test_T5Vt4IEml2A7hU',
+      amount: grandTotal,
+      name: products[0].productId.name,
+      order_id: '',
+      prefill: {
+        email: userData.email,
+        contact: userData.mobile,
+        name: userData.firstName,
+      },
+      theme: {color: '#53a20e'},
+    };
+
+    let payload = {
+      addressId: deliveryAddress.id,
+    };
+
+    if (
+      userAddress?.address?.length === 0 ||
+      Object.keys(deliveryAddress).length === 0
+    ) {
+      alert('Please add address first');
+    } else {
+      RazorpayCheckout.open(options)
+        .then(data => {
+          dispatch(placeOrderRequest({payload, token, getOrder}));
+          PushNotification.localNotification({
+            channelId: 'channel-id',
+            title: 'Order confirmation',
+            message: products[0].productId.name,
+            picture: products[0].productId.mainImage,
+          });
+        })
+        .catch(error => {
+          Toast.show({
+            type: 'error',
+            position: 'bottom',
+            text1: error.description,
+            visibilityTime: 2000,
+            autoHide: true,
+            topOffset: 30,
+            bottomOffset: 40,
+          });
+        });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.changeAddressView}>
-          {Object.keys(deliveryAddress).length === 0 || userAddress?.address?.length === 0 ? null : (
+          {Object.keys(deliveryAddress).length === 0 ||
+          userAddress?.address?.length === 0 ? null : (
             <View style={styles.addressView}>
               <Text style={styles.addressText}>
                 {deliveryAddress.address}, {deliveryAddress.state} -{' '}
@@ -89,7 +127,8 @@ export default function PlaceOrder({navigation}) {
       <TouchableOpacity
         style={styles.placeOrderTouchable}
         activeOpacity={0.8}
-        onPress={handlePlaceOrder}>
+        // onPress={handlePlaceOrder}
+        onPress={handlePayment}>
         <Text style={styles.placeOrderText}> Order Now </Text>
       </TouchableOpacity>
       {modalVisible ? (

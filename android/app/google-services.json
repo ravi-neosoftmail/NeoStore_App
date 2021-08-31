@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "299525907876",
+    "project_id": "neostore-321913",
+    "storage_bucket": "neostore-321913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299525907876:android:3ed43bb8d3c6d8f648cd31",
+        "android_client_info": {
+          "package_name": "com.neostore_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299525907876-89gsuru0bnr8bapqpb167c49ij0e719q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neostore_app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "299525907876-cnknet097maefjguv3qfiu5jvs2129ka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL198sQkTLfkMHrVTnrqI0VSOZZH3fdwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299525907876-cnknet097maefjguv3qfiu5jvs2129ka.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "299525907876-s7b1nkurgk26l8lfjgkbt3orf9hbsq1l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.NeoStore-App"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

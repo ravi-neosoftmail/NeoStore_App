@@ -49,13 +49,7 @@ import {
 } from '../constant/type';
 
 
-/**
- * 
- * @param {*} param0 
- * @description This is a Redux Action which contains the payloads of information..
- * @author Ravi Ranjan
- * @returns the payload of information from application to store
- */
+
 
 
 

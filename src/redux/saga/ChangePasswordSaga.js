@@ -14,7 +14,6 @@ import {loginSuccess} from '../action/action';
 
 
 export function* changePasswordSaga(action) {
-  console.log(action, 'changePasswordSaga');
   try {
     const response = yield call(async () => {
       const result = await axios.post(
@@ -28,12 +27,10 @@ export function* changePasswordSaga(action) {
       );
       return result;
     });
-    console.log(response, 'response');
     if (response.data.success) {
         action.getMessage('Password Changed Successfully')
     }
   } catch (error) {
-    console.log(error, error.response);
     action.getMessage(error.response.data.message)
   }
 }

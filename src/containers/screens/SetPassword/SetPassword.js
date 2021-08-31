@@ -1,24 +1,26 @@
-import React, { useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import normalize from "react-native-normalize";
-import GenericTextInput from "../../../component/GenericTextInput";
-import GenericButton from "../../../component/GenericButton";
-import { ConfirmNewPasswordValidator, errorValidator, newPasswordValidator, passwordValidator } from "../../../component/Validator";
-import { changePasswordRequest } from "../../../redux/action/action";
-import { useDispatch, useSelector } from "react-redux";
-
+import React, {useState} from 'react';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import normalize from 'react-native-normalize';
+import GenericTextInput from '../../../component/GenericTextInput';
+import GenericButton from '../../../component/GenericButton';
+import {
+  ConfirmNewPasswordValidator,
+  errorValidator,
+  newPasswordValidator,
+  passwordValidator,
+} from '../../../component/Validator';
+import {changePasswordRequest} from '../../../redux/action/action';
+import {useDispatch, useSelector} from 'react-redux';
 
 /**
- * 
- * @param {*} param0 
+ *
+ * @param {*} param0
  * @description This is a Change Password screen which requires user identification and authentication, regularly performed by entering user old password and new password combination.
  * @author Ravi Ranjan
  * @returns JSX element that describes how a section of the UI (User Interface) should appear.
  */
 
-
 export default function SetPassword() {
-
   const dispatch = useDispatch();
 
   const [oldVisible, setOldVisible] = useState(false);
@@ -32,19 +34,16 @@ export default function SetPassword() {
     password: '',
     newPassword: '',
     confirmNewPassword: '',
-    error: {}
-  })
-
+    error: {},
+  });
 
   const handleResetPassword = () => {
     let errorOccur = errorValidator(resetData);
 
     let payload = {
       password: resetData.password,
-      newPassword: resetData.newPassword
+      newPassword: resetData.newPassword,
     };
-
-      // dispatch(changePasswordRequest({payload, token, getMessage}));
 
     if (
       Object.keys(errorOccur).length === 0 &&
@@ -55,19 +54,19 @@ export default function SetPassword() {
     } else {
       setResetData({...resetData, error: errorOccur});
     }
-  }
+  };
 
-  const getMessage = (message) => {
-    if(message === 'Password Changed Successfully'){
+  const getMessage = message => {
+    if (message === 'Password Changed Successfully') {
       setResetData({
         password: '',
         newPassword: '',
         confirmNewPassword: '',
-        error: {}
-      })
+        error: {},
+      });
     }
-    alert(message)
-  }
+    alert(message);
+  };
 
   return (
     <SafeAreaView>
@@ -75,17 +74,17 @@ export default function SetPassword() {
         <View style={styles.container}>
           <View>
             <Text style={styles.headingText}> NeoStore </Text>
-            <GenericTextInput 
-              placeHolder="Old Password" 
-              iconName="lock" 
-              type='password'
+            <GenericTextInput
+              placeHolder="Old Password"
+              iconName="lock"
+              type="password"
               value={resetData.password}
               // onChangeText={val =>
               //   setResetData({...resetData, password: val})
               // }
-              onChangeText = {val => {
-                passwordValidator(val, resetData)
-                setResetData({...resetData, password: val})
+              onChangeText={val => {
+                passwordValidator(val, resetData);
+                setResetData({...resetData, password: val});
               }}
               error={resetData.error.password}
               secure={oldVisible ? false : true}
@@ -100,9 +99,9 @@ export default function SetPassword() {
               // onChangeText={val =>
               //   setResetData({...resetData, newPassword: val})
               // }
-              onChangeText = {val => {
-                newPasswordValidator(val, resetData)
-                setResetData({...resetData, newPassword: val})
+              onChangeText={val => {
+                newPasswordValidator(val, resetData);
+                setResetData({...resetData, newPassword: val});
               }}
               error={resetData.error.newPassword}
               secure={visible ? false : true}
@@ -118,9 +117,9 @@ export default function SetPassword() {
               // onChangeText={val =>
               //   setResetData({...resetData, confirmNewPassword: val})
               // }
-              onChangeText = {val => {
-                ConfirmNewPasswordValidator(val, resetData)
-                setResetData({...resetData, confirmNewPassword: val})
+              onChangeText={val => {
+                ConfirmNewPasswordValidator(val, resetData);
+                setResetData({...resetData, confirmNewPassword: val});
               }}
               error={resetData.error.confirmNewPassword}
               secure={passwordVisible ? false : true}
@@ -128,7 +127,10 @@ export default function SetPassword() {
               visible={passwordVisible}
             />
 
-            <GenericButton title="Submit" onPress={() =>handleResetPassword()}/>
+            <GenericButton
+              title="Submit"
+              onPress={() => handleResetPassword()}
+            />
           </View>
         </View>
       </ScrollView>
@@ -139,13 +141,13 @@ export default function SetPassword() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     padding: 20,
   },
   headingText: {
-    alignSelf: "center",
+    alignSelf: 'center',
     fontSize: normalize(40),
     marginBottom: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });

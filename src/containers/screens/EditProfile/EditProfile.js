@@ -17,6 +17,7 @@ import DatePicker from 'react-native-datepicker';
 import {useDispatch, useSelector} from 'react-redux';
 import * as ImagePicker from 'react-native-image-picker';
 import {changeUserImage} from '../../../redux/action/action';
+import Toast from 'react-native-toast-message';
 
 /**
  *
@@ -48,9 +49,7 @@ export default function EditProfile() {
       if (response.didCancel) {
         Alert.alert('You did not select any image');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
       } else {
         dispatch(changeUserImage(response.assets[0].uri));
       }
@@ -121,7 +120,19 @@ export default function EditProfile() {
             }}
           />
         </View>
-        <GenericButton title="Submit" />
+        <GenericButton title="Submit" 
+          onPress={() =>{
+            Toast.show({
+              type: 'info',
+              position: 'bottom',
+              text1: 'Api Not Available',
+              visibilityTime: 2000,
+              autoHide: true,
+              topOffset: 30,
+              bottomOffset: 40,
+            });
+          }}
+        />
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -147,6 +158,7 @@ const styles = StyleSheet.create({
     marginBottom: normalize(20),
     flexDirection: 'row',
     justifyContent: 'center',
+    paddingLeft:normalize(30)
   },
   editTouchableIcon: {
     width: 40,

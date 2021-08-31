@@ -47,7 +47,10 @@ export default function ShippingAddress({navigation}) {
         style={styles.addTouchable}
         activeOpacity={0.9}
         onPress={() => navigation.navigate('Add Address')}>
+          {/* <View style={{borderWidth:1,borderRadius: 50,
+    borderColor:'white'}}> */}
         <Text style={styles.plusText}> + </Text>
+          {/* </View> */}
       </TouchableOpacity>
     </View>
   );
@@ -60,8 +63,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightgray,
   },
   addTouchable: {
-    height: normalize(80),
-    width: normalize(80),
+    height: normalize(60),
+    width: normalize(60),
     borderRadius: 50,
     position: 'absolute',
     right: normalize(25),

@@ -47,11 +47,6 @@ export default function AllProducts(props) {
 
   const isLoading = useSelector(state => state.productList.isLoading);
 
-  // const [cloneData, setCloneData] = useState(productListData);
-
-  // const [sortedData, setSortedData] = useState(cloneData);
-  // const [sortedData, setSortedData] = useState(di);
-
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState({
     type: '',
@@ -59,124 +54,6 @@ export default function AllProducts(props) {
   });
 
   const [filterButton, setFilterButton] = useState(false);
-
-  // useEffect(() => {
-  //   // dispatch(productListRequest());
-  //   // setSortedData(productListData);
-  // }, []);
-
-  // const handleSorting = (type, subType) => {
-  //   if (type === 'price') {
-  //    if(data){
-  //     if (subType === 'high') {
-  //       setSortedData(
-  //         sortedData.sort(function (a, b) {
-  //           return b.price - a.price;
-  //         }),
-  //         setModalVisible(false),
-  //       );
-  //     } else if (subType === 'low') {
-  //       setSortedData(
-  //         sortedData.sort(function (a, b) {
-  //           return a.price - b.price;
-  //         }),
-  //         setModalVisible(false),
-  //       );
-  //     }
-  //    }else {
-  //     if (subType === 'high') {
-  //       setSortedData(
-  //         cloneData.sort(function (a, b) {
-  //           return b.price - a.price;
-  //         }),
-  //         setModalVisible(false),
-  //       );
-  //     } else if (subType === 'low') {
-  //       setSortedData(
-  //         cloneData.sort(function (a, b) {
-  //           return a.price - b.price;
-  //         }),
-  //         setModalVisible(false),
-  //       );
-  //     }
-  //   }
-  //   }
-
-  //   if (type === 'rating') {
-  //     if(data){
-  //       if (subType === 'high') {
-  //         setSortedData(
-  //           sortedData.sort(function (a, b) {
-  //             return b.avgRating - a.avgRating;
-  //           }),
-  //           setModalVisible(false),
-  //         );
-  //       } else if (subType === 'low') {
-  //         setSortedData(
-  //           sortedData.sort(function (a, b) {
-  //             return a.avgRating - b.avgRating;
-  //           }),
-  //           setModalVisible(false),
-  //         );
-  //       }
-  //     }else{
-  //     if (subType === 'high') {
-  //       setSortedData(
-  //         cloneData.sort(function (a, b) {
-  //           return b.avgRating - a.avgRating;
-  //         }),
-  //         setModalVisible(false),
-  //       );
-  //     } else if (subType === 'low') {
-  //       setSortedData(
-  //         cloneData.sort(function (a, b) {
-  //           return a.avgRating - b.avgRating;
-  //         }),
-  //         setModalVisible(false),
-  //       );
-  //     }
-  //   }
-  //   }
-
-  //   if (type === 'Category') {
-  //     setModalVisible(!modalVisible);
-  //     setSortedData(
-  //       cloneData.filter(function (a) {
-  //         return a.category.name === subType;
-  //       }),
-  //     );
-  //   }
-
-  //   if (type === 'Color') {
-  //     setModalVisible(!modalVisible);
-  //     setSortedData(
-  //       cloneData.filter(function (a) {
-  //         return a.color.name === subType;
-  //       }),
-  //     );
-  //   }
-
-  // };
-
-  // const handleSorting = (type, subType) => {
-  //   if (type === 'Category') {
-  //     setModalVisible(!modalVisible);
-  //     setCloneData(
-  //       productListData.filter(function (a) {
-  //         return a.category.name === subType;
-  //       }),
-  //     );
-  //   }
-
-  //   if (type === 'Color') {
-  //     setModalVisible(!modalVisible);
-  //     setCloneData(
-  //       productListData.filter(function (a) {
-  //         return a.color.name === subType;
-  //       }),
-  //     );
-  //   }
-  // }
 
   const handleModal = type => {
     setModalVisible(true);
@@ -190,24 +67,6 @@ export default function AllProducts(props) {
       setModalData({type: 'Color', data: colorData});
     }
   };
-
-  // useEffect(() => {
-  //   if (props.route.params.type === 'All') {
-  //     setSortedData(productListData);
-  //     // setCloneData(productListData)
-  //   } else {
-  //     setSortedData(
-  //       cloneData.filter(function (a) {
-  //         return a.category.name === props.route.params.type;
-  //       }),
-  //     );
-  //     // setCloneData(
-  //     //   cloneData.filter(function (a) {
-  //     //     return a.category.name === props.route.params.type;
-  //     //   }),
-  //     // );
-  //   }
-  // }, [props.route.params]);
 
   const handleSorting = (type, subType) => {
     setModalVisible(false);
@@ -235,10 +94,6 @@ export default function AllProducts(props) {
           style={styles.clearFilterTouchable}
           onPress={() => {
             dispatch(productListRequest());
-            // dispatch(clearAllFilter())
-            // dispatch(clearFilter())
-            // setSortedData(productListData);
-            // setCloneData(productListData)
             setFilterButton(false);
           }}>
           <Text style={styles.clearFilterText}>Clear Filter</Text>
@@ -314,7 +169,6 @@ export default function AllProducts(props) {
                       activeOpacity={0.8}
                       onPress={() => {
                         handleSorting(modalData.type, item.subType);
-                        // dispatch(changeCategory(modalData.type, item.subType))
                         setFilterButton(true);
                       }}>
                       <Text style={styles.flatlistText}> {item.title} </Text>
@@ -333,7 +187,6 @@ export default function AllProducts(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
   },
   botomView: {
     position: 'absolute',

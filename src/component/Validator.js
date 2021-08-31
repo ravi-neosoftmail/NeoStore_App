@@ -159,9 +159,7 @@ export const passwordValidator = (val, initialValue) => {
 };
 
 export const confirmPasswordValidator = (val, initialValue) => {
-  console.log(val, 'initialValue', initialValue);
   if (val.length === 0) {
-    console.log('at here');
     initialValue.error['confirm_Password'] = '*required';
   } else if (initialValue.password != val) {
     initialValue.error['confirm_Password'] = '*password not match';

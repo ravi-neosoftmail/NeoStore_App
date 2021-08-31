@@ -11,6 +11,8 @@ import {Colors} from '../../../assets/Colors';
 import normalize from 'react-native-normalize';
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Toast from 'react-native-toast-message';
+
 
 export default function RateModal(props) {
   const [starValue, setStarValue] = useState(0);
@@ -59,7 +61,19 @@ export default function RateModal(props) {
 
             <TouchableOpacity
               style={styles.rateButton}
-              onPress={() => props.setModalVisible(false)}>
+              onPress={() => {
+                props.setModalVisible(false)
+                Toast.show({
+                  type: 'success',
+                  position: 'bottom',
+                  text1: 'Rating Successfull',
+                  visibilityTime: 2000,
+                  autoHide: true,
+                  topOffset: 30,
+                  bottomOffset: 40,
+                });
+              }}
+              >
               <Text style={styles.rateButtonText}> Rate </Text>
             </TouchableOpacity>
           </View>

@@ -36,7 +36,6 @@ export function* userLogin(action) {
       yield put(loginSuccess(response.data.data));
     }
   } catch (error) {
-    console.log(error, error.response);
     action.getError(error.response.data.message);
   }
 }

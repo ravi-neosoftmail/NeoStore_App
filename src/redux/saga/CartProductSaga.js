@@ -50,7 +50,6 @@ export function* addCartProductSaga(action) {
       action.payload.getCart(action.payload.type);
     }
   } catch (error) {
-    console.log(error, error.response);
     action.payload.errorAlert(error.response.data.message, action.payload.type)
   }
 }

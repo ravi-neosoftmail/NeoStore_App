@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from 'react-native';
 import ProductListFlatlist from '../ProductList/ProductListFlatlist';
 import Icons from 'react-native-vector-icons/MaterialIcons';
@@ -17,6 +18,10 @@ import {
 } from '../../../redux/action/action';
 import {Colors} from '../../../assets/Colors';
 import Swiper from 'react-native-swiper';
+import messaging from '@react-native-firebase/messaging';
+import PushNotification from 'react-native-push-notification';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 /**
  *
@@ -38,6 +43,37 @@ export default function Dashboard({navigation}) {
 
   useEffect(() => {
     dispatch(productListRequest());
+    requestUserPermission();
+
+    PushNotification.configure({
+      onRegister: function (token) {},
+      onNotification: function (notification) {
+        notification.finish(PushNotificationIOS.FetchResult.NoData);
+      },
+      onAction: function (notification) {},
+      onRegistrationError: function (err) {
+        console.error(err.message, err);
+      },
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true,
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
+    PushNotification.createChannel(
+      {
+        channelId: 'channel-id', 
+        channelName: 'My channel', 
+        channelDescription: 'A channel to categorise your notifications', 
+        playSound: false, 
+        soundName: 'default', 
+        importance: 4, 
+        vibrate: true, 
+      },
+      created => console.log(`createChannel returned '${created}'`),
+    );
   }, []);
 
   useEffect(() => {
@@ -45,6 +81,32 @@ export default function Dashboard({navigation}) {
       dispatch(dashboardFilter());
     }
   }, [productListData]);
+
+  const requestUserPermission = async () => {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      getFcmToken();
+    }
+  };
+
+  const getFcmToken = async () => {
+    let fcmToken = await AsyncStorage.getItem('fcmToken');
+
+    if (!fcmToken) {
+      try {
+        const fcmToken = await messaging().getToken();
+        if (fcmToken) {
+          await AsyncStorage.setItem('fcmToken', fcmToken);
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -57,72 +119,75 @@ export default function Dashboard({navigation}) {
           <Text style={{color: Colors.gray}}>Search Product </Text>
         </View>
       </TouchableOpacity>
-      <View style={{width: '100%', height: 260}}>
-        <Swiper autoplay loop height={250}>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(filterCategory('Bed'));
-              navigation.navigate('All Products');
-            }}>
-            <Image
-              style={styles.swiperImage}
-              source={require('../../../assets/Images/bed.jpeg')}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
+        <View style={{width: '100%', height: 260}}>
+          <Swiper autoplay loop height={250}>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(filterCategory('Bed'));
+                navigation.navigate('All Products');
+              }}>
+              <Image
+                style={styles.swiperImage}
+                source={require('../../../assets/Images/bed.jpeg')}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(filterCategory('Chair'));
-              navigation.navigate('All Products');
-            }}>
-            <Image
-              style={styles.swiperImage}
-              source={require('../../../assets/Images/Chair.png')}
-              resizeMode="stretch"
-            />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(filterCategory('Chair'));
+                navigation.navigate('All Products');
+              }}>
+              <Image
+                style={styles.swiperImage}
+                source={require('../../../assets/Images/Chair.png')}
+                resizeMode="stretch"
+              />
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(filterCategory('Sofa'));
-              navigation.navigate('All Products');
-            }}>
-            <Image
-              style={styles.swiperImage}
-              source={require('../../../assets/Images/Sofa.jpeg')}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(filterCategory('Sofa'));
+                navigation.navigate('All Products');
+              }}>
+              <Image
+                style={styles.swiperImage}
+                source={require('../../../assets/Images/Sofa.jpeg')}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(filterCategory('Table'));
-              navigation.navigate('All Products');
-            }}>
-            <Image
-              style={styles.swiperImage}
-              source={require('../../../assets/Images/Table.jpeg')}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
-        </Swiper>
-      </View>
-
-      <View style={styles.productsHeaderView}>
-        <Text style={styles.productsHeaderText}> Top Products for you </Text>
-      </View>
-      {isLoading ? (
-        <View style={styles.loaderView}>
-          <ActivityIndicator size={30} color={Colors.skyblue} />
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(filterCategory('Table'));
+                navigation.navigate('All Products');
+              }}>
+              <Image
+                style={styles.swiperImage}
+                source={require('../../../assets/Images/Table.jpeg')}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
+          </Swiper>
         </View>
-      ) : (
-        <ProductListFlatlist
-          productListData={topProducts}
-          navigation={navigation}
-          type="dashboard"
-        />
-      )}
+
+        <View style={styles.productsHeaderView}>
+          <Text style={styles.productsHeaderText}> Top Products for you </Text>
+        </View>
+        {isLoading ? (
+          <View style={styles.loaderView}>
+            <ActivityIndicator size={30} color={Colors.skyblue} />
+          </View>
+        ) : (
+          <ProductListFlatlist
+            productListData={topProducts}
+            navigation={navigation}
+            type="dashboard"
+          />
+        )}
+      </ScrollView>
     </View>
   );
 }
@@ -179,7 +244,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     opacity: 0.5,
-    borderWidth: 2,
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',

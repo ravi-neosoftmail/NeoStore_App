@@ -1,11 +1,16 @@
 import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import normalize from 'react-native-normalize';
 import {useDispatch, useSelector} from 'react-redux';
 import {Colors} from '../../../assets/Colors';
 import {getOrderListRequest} from '../../../redux/action/action';
-
-
 
 /**
  *
@@ -15,14 +20,11 @@ import {getOrderListRequest} from '../../../redux/action/action';
  * @returns JSX element that describes how a section of the UI (User Interface) should appear.
  */
 
-
-
 export default function OrderHistory({navigation}) {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userData.user);
   const orderData = useSelector(state => state.orderList.orderList);
-
-  const isLoading = useSelector(state=> state.orderList.isLoading)
+  const isLoading = useSelector(state => state.orderList.isLoading);
 
   const {token} = userData;
 
@@ -32,54 +34,46 @@ export default function OrderHistory({navigation}) {
 
   return (
     <View style={styles.container}>
-
-{isLoading ? (
+      {isLoading ? (
         <ActivityIndicator size={30} color={Colors.skyblue} />
       ) : (
-      <FlatList
-        data={orderData}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.flatlistContainer}
-            onPress={() => navigation.navigate('Order Details', {item})}>
-            <View style={styles.idView}>
-              <Text style={styles.idText}>
-                Order Id : {item.id}
-              </Text>
-            </View>
-
-            <View style={styles.middleView}>
-              <View style={styles.descriptionView}>
-                <FlatList 
-                  data={item.items}
-                  keyExtractor = {item => item.id}
-                  renderItem={ ({item}) => (
-                    <Text style={[styles.textStyle, {marginBottom:normalize(10)}]}>
-                      {item.productId.name}
-                  </Text>
-                  )}
-                />
-                
+        <FlatList
+          data={orderData}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={styles.flatlistContainer}
+              onPress={() => navigation.navigate('Order Details', {item})}>
+              <View style={styles.idView}>
+                <Text style={styles.idText}>Order Id : {item.id}</Text>
               </View>
 
-              {/* <View style={styles.separatorLine}></View>
+              <View style={styles.middleView}>
+                <View style={styles.descriptionView}>
+                  <FlatList
+                    data={item.items}
+                    keyExtractor={item => item.id}
+                    renderItem={({item}) => (
+                      <Text
+                        style={[
+                          styles.textStyle,
+                          {marginBottom: normalize(10)},
+                        ]}>
+                        {item?.productId?.name}
+                      </Text>
+                    )}
+                  />
+                </View>
+              </View>
 
-              <View style={styles.priceView}>
+              <View style={styles.bottomView}>
                 <Text style={styles.textStyle}>
-                  Rs.{item.items[0].productId.price}
+                  Order on : {item.updatedAt.slice(0, 10)}
                 </Text>
-              </View> */}
-            </View>
-
-            <View style={styles.bottomView}>
-              <Text style={styles.textStyle}>
-                Order on : {item.updatedAt.slice(0,10)}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       )}
     </View>
   );
@@ -89,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: normalize(15),
-    justifyContent:'center'
+    justifyContent: 'center',
   },
   flatlistContainer: {
     backgroundColor: Colors.white,
@@ -122,7 +116,7 @@ const styles = StyleSheet.create({
   },
   descriptionView: {
     padding: normalize(10),
-    paddingBottom:0
+    paddingBottom: 0,
   },
   textStyle: {
     fontSize: normalize(15),

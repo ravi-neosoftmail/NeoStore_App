@@ -19,7 +19,6 @@ export default function MyAccount({navigation}) {
   const userData = useSelector(state => state.userData.user);
   const userImage = useSelector(state => state.userImage.userImage);
 
-  console.log(userImage, 'userImage', userImage.length);
 
   return (
     <View style={styles.container}>

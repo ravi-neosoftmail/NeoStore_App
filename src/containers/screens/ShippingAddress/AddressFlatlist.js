@@ -27,7 +27,6 @@ export default function AddressFlatlist({userAddress, navigation}) {
   const userData = useSelector(state => state.userData.user);
   const cart = useSelector(state => state.cartProduct.cartProduct);
 
-
   const {token} = userData;
 
   const showAlert = id => {
@@ -50,68 +49,74 @@ export default function AddressFlatlist({userAddress, navigation}) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={userAddress}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.flatlistContainer}
-            onPress={() => {
-              let payload = {
-                address: item.addressLine,
-                city: item.city,
-                pincode: item.pincode,
-                state: item.state,
-                country: item.country,
-                id: item._id,
-              };
-              dispatch(saveUserAddress(payload));
-              {
-                cart?.products?.length >= 1
-                  ? navigation.navigate('Place Order')
-                  : Alert.alert('Add some Product in Cart first', '', [
-                      {
-                        text: 'Ok',
-                      },
-                    ]);
-              }
-            }}>
-            <View style={styles.addressView}>
-              <Text style={styles.addressText}>
-                {item.addressLine}, {item.state} - {item.pincode},{' '}
-                {item.country}
-              </Text>
-            </View>
+      {userAddress?.length === 0 ? (
+        <View style={styles.noDataView}>
+          <Text style={styles.noDataText}>No Address available</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={userAddress}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={styles.flatlistContainer}
+              onPress={() => {
+                let payload = {
+                  address: item.addressLine,
+                  city: item.city,
+                  pincode: item.pincode,
+                  state: item.state,
+                  country: item.country,
+                  id: item._id,
+                };
+                dispatch(saveUserAddress(payload));
+                {
+                  cart?.products?.length >= 1
+                    ? navigation.navigate('Place Order')
+                    : Alert.alert('Add some Product in Cart first', '', [
+                        {
+                          text: 'Ok',
+                        },
+                      ]);
+                }
+              }}>
+              <View style={styles.addressView}>
+                <Text style={styles.addressText}>
+                  {item.addressLine}, {item.state} - {item.pincode},{' '}
+                  {item.country}
+                </Text>
+              </View>
 
-            <View style={styles.bottomView}>
-              <TouchableOpacity
-                style={styles.bottomOptionTouchable}
-                activeOpacity={0.6}
-                onPress={() =>
-                  navigation.navigate('Edit Address', {
-                    address: item.addressLine,
-                    city: item.city,
-                    pincode: item.pincode,
-                    state: item.state,
-                    country: item.country,
-                    id: item._id,
-                  })
-                }>
-                <Text style={styles.optionText}> Edit </Text>
-              </TouchableOpacity>
+              <View style={styles.bottomView}>
+                <TouchableOpacity
+                  style={styles.bottomOptionTouchable}
+                  activeOpacity={0.6}
+                  onPress={() =>
+                    navigation.navigate('Edit Address', {
+                      address: item.addressLine,
+                      city: item.city,
+                      pincode: item.pincode,
+                      state: item.state,
+                      country: item.country,
+                      id: item._id,
+                    })
+                  }>
+                  <Text style={styles.optionText}> Edit </Text>
+                </TouchableOpacity>
 
-              <View style={styles.separatorView}></View>
+                <View style={styles.separatorView}></View>
 
-              <TouchableOpacity
-                style={styles.bottomOptionTouchable}
-                activeOpacity={0.6}
-                onPress={() => showAlert(item._id)}>
-                <Text style={styles.optionText}> Remove </Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+                <TouchableOpacity
+                  style={styles.bottomOptionTouchable}
+                  activeOpacity={0.6}
+                  onPress={() => showAlert(item._id)}>
+                  <Text style={styles.optionText}> Remove </Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      )}
     </View>
   );
 }
@@ -154,5 +159,14 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: normalize(15),
     fontWeight: 'bold',
+  },
+  noDataView: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noDataText: {
+    fontSize: normalize(30),
+    color: Colors.gray,
   },
 });

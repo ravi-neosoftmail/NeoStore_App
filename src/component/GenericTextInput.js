@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
-    // textDecorationColor:'black'
   },
   textInput: {
     height: normalize(50),

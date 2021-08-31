@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">NeoStore_App</string>
+    <string name="server_client_id">299525907876-89gsuru0bnr8bapqpb167c49ij0e719q.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">1014930315925366</string>
+    <string name="fb_login_protocol_scheme">fb1014930315925366</string>
 </resources>
